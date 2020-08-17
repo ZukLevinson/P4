@@ -15,6 +15,7 @@ class Header extends React.Component {
             time: new Date()
         })
     }
+
     componentWillMount()
     {
         setInterval(()=>this.currentTime(),1000)
