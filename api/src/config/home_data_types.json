@@ -1,0 +1,20 @@
+{
+    "finance":[
+        {
+            "title":"income",
+            "sub_title_1":"collections by recite",
+            "sub_title_2":"credit collections"
+        },{
+            "title":"expected outcomes",
+            "sub_title_1":"by the end of the month",
+            "sub_title_2":"by now"
+        },{
+            "title":"expanses graph"
+        },{
+            "title":"performance",
+            "sub_title_1":"orders",
+            "sub_title_2":"efficiency",
+           "sub_title_3":"development growth"
+        }
+    ]
+}
