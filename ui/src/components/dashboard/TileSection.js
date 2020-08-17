@@ -1,7 +1,9 @@
 import React from 'react';
 
-class Section extends React.Component{
+class TileSection extends React.Component{
     render(){
+        const data = this.props.data;
+        console.log(data)
         return(
             <div className="list_info" id="income">
                 <a className="cell_title">income</a>
@@ -28,4 +30,4 @@ class Section extends React.Component{
     }
 }
 
-export default Section;
+export default TileSection;
