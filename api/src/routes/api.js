@@ -36,7 +36,7 @@ router.post('/validate/user', async (req, res, next) => {
                 worker_id: worker[0].id
             },
             process.env.BUSINESS_TOKEN_SECRET);
-        return res.status(201).cookie('business-token', token).json({
+        return res.status(201).cookie('business_token', token).json({
             userValid: true
         })
     } catch (err) {
@@ -45,8 +45,16 @@ router.post('/validate/user', async (req, res, next) => {
 });
 
 //Sign Up
-router.get('/users/sign-up', async (req, res) => {
-
+router.get('/authenticate', async (req, res) => {
+    const cookies = parseCookies(req);
+    console.log(cookies)
+    ;
+    if ("business_token" in cookies) {
+        console.log(jwt.verify(cookies.business_token,process.env.BUSINESS_TOKEN_SECRET));
+    } else {
+        res.json({'exist': 'false',})
+    }
+    res.end();
 })
 
 //Parse cookies

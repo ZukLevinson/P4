@@ -1,14 +1,16 @@
 import React from 'react';
-import './App.css';
+import ItemSection from './ItemSection';
 
 function Item() {
     return (
         <div className="info_box" id="finance">
             <div className="info_box_content">
                 <div className="title">
-                    Finance
+                    Workers
                 </div>
                 <div className="horizontal_line"></div>
+
+                <ItemSection/>
                 <div className="list_info" id="income">
                     <a className="cell_title">income</a>
                     <table>

@@ -1,30 +1,34 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
-const connectDb = require('./src/connection');
-const User = require('./src/User.model');
-const cors = require('cors');
 
-const PORT = 8080;
-app.use(cors());
+const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose')
+const cors = require("cors");
 
-app.get('/users', async (req, res) => {
-  const users = await User.find();
+const port = 8080;
 
-  res.json(users);
-});
+//Import Routes
+const api = require('./src/routes/api');
 
-app.get('/user-create', async (req, res) => {
-  const user = new User({ username: 'userTest' });
+//Middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(express.static(process.cwd() + "/src/my-app1/src"));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.use(cookieParser());
 
-  await user.save().then(() => console.log('User created'));
+//Routes Middleware
+app.use('/api', api);
 
-  res.send('User created \n');
-});
-
-app.listen(PORT, function() {
-  console.log(`Listening on ${PORT}`);
-
-  connectDb().then(() => {
-    console.log('MongoDb connected');
-  });
+app.listen(port, function () {
+    console.log(`Listening on http://localhost:` + port);
+    mongoose.connect(process.env.DB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }, () => {
+        console.log('Connected to DB!');
+    });
 });
