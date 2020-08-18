@@ -14,7 +14,7 @@ class TileSection extends React.Component {
         return (
             <div style={listStyle} key={field.kind}>
                 <p style={titleStyle}>{field.kind}</p>
-                <table>
+                <table style={tblStyle}>
                     <tbody>
                     {
                         data.map((obj) => (
@@ -45,5 +45,8 @@ const titleStyle = {
     fontSize: '2vh',
     textTransform: 'capitalize'
 }
-
+const tblStyle = {
+    width: '100%',
+    margin: '10px 0'
+}
 export default TileSection;
