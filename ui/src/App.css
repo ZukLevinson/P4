@@ -2,31 +2,32 @@ body {
     margin: 0;
     background-color: #FBFBFB;
     font-family: 'Heebo', serif;
-    width:100vw;
-    height:100vh;
-    user-select: none;
-    text-decoration: none;
-}
-p{
-    margin:0;
-}
-
-.main {
     width: 100vw;
     height: 100vh;
-    background-color: #FBFBFB;
-    font-family: Heebo, serif;
     user-select: none;
-    display: flex;
-    flex-direction: column;
 }
 
-.bottom_menu {
-    width: 100vw;
-    height: 10vh;
-    background-color: #FBFBFB;
-    box-shadow: 0 0 4px rgba(46, 46, 46, 0.25);
-    display: flex;
+a {
+    text-decoration: none;
+    color: black;
+}
+
+p {
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+img {
+    width: 100%;
+}
+
+body, html {
+    margin: 0;
 }
 
 .bottom_menu > * {
@@ -35,70 +36,14 @@ p{
     display: flex;
 }
 
-.bottom_menu_left, .bottom_menu_right {
-    width: 15%;
-}
-
-.bottom_menu_middle {
-    width: 70%;
-}
-
-.bottom_menu_left > * {
-    margin: 10px 30px;
-    width: 100%;
-}
-
-#logo {
-    width: 100%;
-    display: block;
-}
-
-.vertical_line {
-    height: 50%;
-    width: 1px;
-    background-color: rgb(213, 213, 213);
-}
-
-.left {
-    float: left;
-    margin-right: auto;
-}
-
-.right {
-    float: right;
-    margin-left: auto;
-}
-
-.bottom_menu_right .user_info, .bottom_menu_right .user_info > * {
+.bottom_menu_right .user_info, .bottom_menu_right > * {
     margin: auto;
     text-align: center;
-}
-
-.bottom_menu_middle .buttons {
-    justify-content: space-evenly;
-    width: 100%;
-    display: flex;
-}
-
-.bottom_menu_middle .buttons .content {
-    width: 10%;
-    overflow: hidden;
-    text-align: center;
-}
-
-.bottom_menu_middle .buttons .content > * {
-    width: 30%;
-    display: block;
-    margin: auto;
-}
-
-.bottom_menu_middle .buttons .content img {
-    margin-bottom: 7px;
-    pointer-events: none;
 }
 
 .button {
     color: black;
+    text-decoration: none;
 }
 
 .button:hover {
@@ -107,14 +52,7 @@ p{
     cursor: pointer;
 }
 
-.interface {
-    height: 90vh;
-    width: 100vw;
-    overflow-x: hidden;
-    white-space: nowrap;
-}
-
-.interface .info_box {
+.tile {
     width: calc(21vw - 20px);
     min-width: calc(21vw - 20px);
     background-color: #FBFBFB;
@@ -132,40 +70,12 @@ p{
     display: flex;
     flex-direction: column;
     padding: 10px;
+    cursor: pointer;
 }
 
-.interface .info_box:hover {
+.tile:hover {
     box-shadow: 0 0 80px rgba(46, 46, 46, 0.33);
     transition: 0.2s ease-in-out;
-}
-
-.info_box .info_box_content {
-    overflow-y: auto;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-.dot_scroller {
-    position: absolute;
-    background-color: #FBFBFB;
-    box-shadow: 0 0 40px rgba(46, 46, 46, 0.25);
-
-    min-width: 50px;
-    width: 50px;
-    height: 20px;
-    border-radius: 10px;
-
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 11vh;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .dot {
@@ -189,72 +99,11 @@ p{
     cursor: pointer;
 }
 
-.dot_button:hover > .dot {
+.dot_button:hover > div {
     background-color: rgba(46, 46, 46, 0.28);
     transition: 0.25s ease-in-out;
 }
 
 .simplebar-wrapper {
     height: available;
-}
-
-.info_container {
-    height: inherit;
-    display: inline-block;
-    width: inherit;
-    vertical-align: top;
-}
-
-.info_container > * {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    height: inherit;
-    width: inherit;
-}
-
-.info_box_content .title {
-    font-size: 4vh;
-    color: #2E2E2E;
-}
-
-.horizontal_line {
-    height: 1px;
-    width: 100%;
-    background-color: #2E2E2E;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-}
-
-.list_info {
-    text-transform: capitalize;
-    font-size: 1.5vh;
-    margin-bottom: 20px;
-}
-
-.list_info td {
-    width: 50%;
-}
-
-table {
-    width: 100%;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.cell_title {
-    font-size: 2vh;
-}
-
-.graph {
-    width: 100%;
-}
-
-img {
-    width: 100%;
-}
-
-body,html{
-    margin: 0;
 }

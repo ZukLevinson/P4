@@ -2,12 +2,6 @@ import React from 'react';
 import Button from "./Button";
 import VerticalLine from "./VerticalLine";
 import Company from "./Company";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 
 class Header extends React.Component {
     constructor() {
@@ -29,7 +23,7 @@ class Header extends React.Component {
         const buttons = [{
             title: 'BTN 1',
             icon: './img/icons/house.png',
-            link: '/home',
+            link: '/dashboard',
             id: '1'
         }, {
             title: 'BTN 2',
@@ -105,7 +99,8 @@ const bottomMiddleStyle = {
     alignItems: 'center'
 }
 const bottomSidesStyle = {
-    width: '15%'
+    width: '15%',
+    textAlign: 'center'
 }
 
 const buttonsStyle = {
