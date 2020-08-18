@@ -1,33 +1,49 @@
 import React from 'react';
+import HorizontalLine from "./HorizontalLine";
 
-class TileSection extends React.Component{
-    render(){
-        const data = this.props.data;
+class TileSection extends React.Component {
+    render() {
+        const field = this.props.data;
+        const data = [];
+        for (let key in field) {
+            if (key !== 'kind' && key !== 'categories') {
+                data.push([key, field[key]]);
+            }
+        }
         console.log(data)
-        return(
-            <div className="list_info" id="income">
-                <a className="cell_title">income</a>
+        return (
+            <div style={listStyle} key={field.kind}>
+                <p style={titleStyle}>{field.kind}</p>
                 <table>
-                    <tr>
-                        <td>
-                            collections by recite
-                        </td>
-                        <td>
-                            1000$
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            credit collections
-                        </td>
-                        <td>
-                            100$
-                        </td>
-                    </tr>
+                    <tbody>
+                    {
+                        data.map((obj) => (
+                            <tr key={obj[0]}>
+                                <td>
+                                    {obj[0]}
+                                </td>
+                                <td>
+                                    {obj[1].toString() + '$'}
+                                </td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
                 </table>
+                <HorizontalLine/>
             </div>
         );
     }
+}
+
+const listStyle = {
+    marginBottom: '10px',
+    textTransform: 'capitalize',
+    fontSize: '1.5vh'
+}
+const titleStyle = {
+    fontSize: '2vh',
+    textTransform: 'capitalize'
 }
 
 export default TileSection;

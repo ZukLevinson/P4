@@ -12,9 +12,7 @@ const lineStyle = {
     height: '1px',
     width: '100%',
     background: '#2E2E2E',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: '10px'
+    margin: '10px auto'
 }
 
 export default HorizontalLine;

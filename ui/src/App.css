@@ -6,6 +6,9 @@ body {
     height:100vh;
     user-select: none;
 }
+p{
+    margin:0;
+}
 
 .main {
     width: 100vw;

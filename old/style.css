@@ -7,10 +7,32 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #FBFBFB;
-    font-family: 'Heebo', serif;
+    font-family: Heebo, serif;
     user-select: none;
     display: flex;
     flex-direction: column;
+}
+
+.bottom_menu {
+    width: 100vw;
+    height: 10vh;
+    background-color: #FBFBFB;
+    box-shadow: 0 0 4px rgba(46, 46, 46, 0.25);
+    display: flex;
+}
+
+.bottom_menu > * {
+    height: inherit;
+    align-items: center;
+    display: flex;
+}
+
+.bottom_menu_left, .bottom_menu_right {
+    width: 15%;
+}
+
+.bottom_menu_middle {
+    width: 70%;
 }
 
 .bottom_menu_left > * {
@@ -60,6 +82,21 @@ body {
     width: 30%;
     display: block;
     margin: auto;
+}
+
+.bottom_menu_middle .buttons .content img {
+    margin-bottom: 7px;
+    pointer-events: none;
+}
+
+.button {
+    color: black;
+}
+
+.button:hover {
+    filter: invert(50%);
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
 }
 
 .interface {

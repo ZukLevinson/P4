@@ -1,14 +1,14 @@
 import React from 'react';
-import Tile from "./Tile";
+import Tiles from "./Tiles";
 
 class Dashboard extends React.Component {
     render() {
         const tiles = [
             {
                 title: 'Finance',
-                data:[
+                data: [
                     {
-                        kind:'Income',
+                        kind: 'Income',
                         cash: 1000,
                         credit: 1030,
                         categories: {
@@ -18,7 +18,85 @@ class Dashboard extends React.Component {
                         }
                     },
                     {
-                        kind:'Outcome',
+                        kind: 'Outcome',
+                        cash: 100,
+                        credit: 78,
+                        categories: {
+                            wood: 0.232,
+                            glass: 0.389,
+                            metal: 0.279,
+                            other: 0.100
+                        }
+                    }
+                ]
+            },
+            {
+                title: 'Finance',
+                data: [
+                    {
+                        kind: 'Income',
+                        cash: 1000,
+                        credit: 1030,
+                        categories: {
+                            kitchens: 0.232,
+                            windows: 0.389,
+                            other: 0.379
+                        }
+                    },
+                    {
+                        kind: 'Outcome',
+                        cash: 100,
+                        credit: 78,
+                        categories: {
+                            wood: 0.232,
+                            glass: 0.389,
+                            metal: 0.279,
+                            other: 0.100
+                        }
+                    }
+                ]
+            },
+            {
+                title: 'Finance',
+                data: [
+                    {
+                        kind: 'Income',
+                        cash: 1000,
+                        credit: 1030,
+                        categories: {
+                            kitchens: 0.232,
+                            windows: 0.389,
+                            other: 0.379
+                        }
+                    },
+                    {
+                        kind: 'Outcome',
+                        cash: 100,
+                        credit: 78,
+                        categories: {
+                            wood: 0.232,
+                            glass: 0.389,
+                            metal: 0.279,
+                            other: 0.100
+                        }
+                    }
+                ]
+            },
+            {
+                title: 'Finance',
+                data: [
+                    {
+                        kind: 'Income',
+                        cash: 1000,
+                        credit: 1030,
+                        categories: {
+                            kitchens: 0.232,
+                            windows: 0.389,
+                            other: 0.379
+                        }
+                    },
+                    {
+                        kind: 'Outcome',
                         cash: 100,
                         credit: 78,
                         categories: {
@@ -32,9 +110,11 @@ class Dashboard extends React.Component {
             }
         ]
 
-        return tiles.map((tile) =>(
-            <Tile title={tile.title} data={tile.data} key={tile.title}/>
-        ))
+        return (
+            <div style={dashStyle}>
+                <Tiles tiles={tiles}/>
+            </div>
+        )
     }
 }
 

@@ -16,7 +16,7 @@ class Header extends React.Component {
         })
     }
 
-    componentWillMount()
+    componentDidMount()
     {
         setInterval(()=>this.currentTime(),1000)
     }
@@ -67,8 +67,8 @@ class Header extends React.Component {
                 </div>
                 <div className="bottom_menu_right" style={bottomSidesStyle}>
                     <div className="user_info">
-                        <a>{this.state.time.toLocaleTimeString()}</a><br/>
-                        <a>{userInfo.name}</a>
+                        <p>{this.state.time.toLocaleTimeString()}</p>
+                        <p>{userInfo.name}</p>
                     </div>
                 </div>
             </div>

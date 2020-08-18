@@ -7,7 +7,7 @@ class Button extends React.Component {
         return (
             <div style={buttonStyle}>
                 <img src={icon} alt={title} style={imgStyle}/>
-                <a>{title}</a>
+                <p>{title}</p>
             </div>
         );
     }
@@ -23,6 +23,7 @@ const buttonStyle = {
     overflow: 'hidden',
     textAlign: 'center',
     height: 'inherit',
+    margin: '0',
     '&:hover': {
         filter: 'invert(50%)',
         transition: '0.25s ease-in-out',
