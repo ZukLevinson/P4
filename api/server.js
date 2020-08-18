@@ -6,6 +6,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 const cors = require("cors");
+const path = require('path');
 
 const port = 8080;
 
@@ -13,9 +14,10 @@ const port = 8080;
 const api = require('./src/routes/api');
 
 //Middleware
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(express.static(process.cwd() + "/src/my-app1/src"));
+app.use(express.static(process.cwd() + "/app/public/index.html"));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(cookieParser());

@@ -2,6 +2,7 @@ import React from 'react';
 import Button from "./Button";
 import VerticalLine from "./VerticalLine";
 import Company from "./Company";
+import axios from 'axios';
 
 class Header extends React.Component {
     constructor() {
@@ -15,8 +16,19 @@ class Header extends React.Component {
         })
     }
 
+    state = {
+        persons: []
+    }
+
     componentDidMount() {
-        setInterval(() => this.currentTime(), 1000)
+        setInterval(() => this.currentTime(), 1000);
+
+        axios.get(`http://localhost:8080/api/test`)
+            .then(res => {
+                const persons = res.data;
+                this.setState({persons});
+                console.log(persons["msg"])
+            })
     }
 
     render() {
@@ -71,7 +83,7 @@ class Header extends React.Component {
                 <div className="bottom_menu_right" style={bottomSidesStyle}>
                     <div className="user_info">
                         <p>{this.state.time.toLocaleTimeString()}</p>
-                        <p>{userInfo.name}</p>
+                        {/*<p>{userInfo.name}</p>*/}
                     </div>
                 </div>
             </div>

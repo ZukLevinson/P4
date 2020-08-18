@@ -57,6 +57,10 @@ router.get('/authenticate', async (req, res) => {
     res.end();
 })
 
+router.get('/test',async (req,res)=>{
+    res.json({msg:'hello'}).end();
+})
+
 //Parse cookies
 function parseCookies(request) {
     let list = {},
