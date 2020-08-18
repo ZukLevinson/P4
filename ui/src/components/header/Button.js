@@ -6,7 +6,7 @@ class Button extends React.Component {
         const {title, icon} = this.props.data;
 
         return (
-            <div style={buttonStyle} className="button">
+            <div style={btnStyle} className="button">
                 <Link to={this.props.link}>
                     <img src={icon} alt={title} style={imgStyle}/>
                     <p>{title}</p>
@@ -16,7 +16,7 @@ class Button extends React.Component {
     }
 }
 
-const buttonStyle = {
+const btnStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignContent: 'center',
