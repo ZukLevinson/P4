@@ -5,8 +5,9 @@ import HorizontalLine from "./HorizontalLine";
 class Tile extends React.Component {
     render() {
         const tileData = this.props.data;
-        // console.log(tileData)
+
         return (
+
             <div style={tileStyle}>
                 <div style={titleStyle}>
                     {this.props.title}

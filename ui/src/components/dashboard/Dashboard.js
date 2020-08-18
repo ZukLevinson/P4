@@ -1,5 +1,6 @@
 import React from 'react';
-import Tiles from "./Tiles";
+import Cluster from "./Cluster";
+import Dots from "./dotMenu/TilesDots";
 
 class Dashboard extends React.Component {
     render() {
@@ -31,7 +32,7 @@ class Dashboard extends React.Component {
                 ]
             },
             {
-                title: 'Finance',
+                title: 'Workers',
                 data: [
                     {
                         kind: 'Income',
@@ -57,7 +58,22 @@ class Dashboard extends React.Component {
                 ]
             },
             {
-                title: 'Finance',
+                title: 'E1',
+                data: [
+                    {
+                        kind: 'Income',
+                        cash: 1000,
+                        credit: 1030,
+                        categories: {
+                            kitchens: 0.232,
+                            windows: 0.389,
+                            other: 0.379
+                        }
+                    }
+                ]
+            },
+            {
+                title: 'E2',
                 data: [
                     {
                         kind: 'Income',
@@ -83,7 +99,7 @@ class Dashboard extends React.Component {
                 ]
             },
             {
-                title: 'Finance',
+                title: 'E3',
                 data: [
                     {
                         kind: 'Income',
@@ -112,7 +128,8 @@ class Dashboard extends React.Component {
 
         return (
             <div style={dashStyle}>
-                <Tiles tiles={tiles}/>
+                <Cluster tiles={tiles}/>
+                <Dots num={tiles.length}/>
             </div>
         )
     }

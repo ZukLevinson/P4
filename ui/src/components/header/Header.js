@@ -2,45 +2,54 @@ import React from 'react';
 import Button from "./Button";
 import VerticalLine from "./VerticalLine";
 import Company from "./Company";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 class Header extends React.Component {
     constructor() {
         super()
-        this.state={time:new Date()}
+        this.state = {time: new Date()}
     }
 
-    currentTime()
-    {
+    currentTime() {
         this.setState({
             time: new Date()
         })
     }
 
-    componentDidMount()
-    {
-        setInterval(()=>this.currentTime(),1000)
+    componentDidMount() {
+        setInterval(() => this.currentTime(), 1000)
     }
 
     render() {
         const buttons = [{
             title: 'BTN 1',
             icon: './img/icons/house.png',
+            link: '/home',
             id: '1'
         }, {
             title: 'BTN 2',
             icon: './img/icons/pie-chart.png',
+            link: '/pie-chart',
             id: '2'
         }, {
             title: 'BTN 3',
             icon: './img/icons/upload-1.png',
+            link: '/upload-1',
             id: '3'
         }, {
             title: 'BTN 4',
             icon: './img/icons/vector.png',
+            link: '/vector',
             id: '4'
         }, {
             title: 'BTN 5',
             icon: './img/icons/download-1.png',
+            link: '/download-1',
             id: '5'
         }]
         const companyInfo = {
@@ -48,7 +57,7 @@ class Header extends React.Component {
             name: 'Example'
         }
         const userInfo = {
-            name:'Israel Israeli'
+            name: 'Israel Israeli'
         }
 
         return (
@@ -60,7 +69,7 @@ class Header extends React.Component {
                     <VerticalLine/>
                     <div className="buttons" style={buttonsStyle}>
                         {buttons.map((btn) => (
-                            <Button data={btn} key={btn.id}/>
+                            <Button data={btn} key={btn.id} link={btn.link}/>
                         ))}
                     </div>
                     <VerticalLine/>
@@ -84,10 +93,10 @@ const bottomStyle = {
     display: 'flex',
     position: 'absolute',
     bottom: '0',
-    '& > *': {
+    '& div': {
         height: 'inherit',
         alignItems: 'center',
-        display: 'flex',
+        display: 'flex'
     }
 }
 

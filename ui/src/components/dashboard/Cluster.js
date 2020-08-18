@@ -1,7 +1,7 @@
 import React from 'react';
 import Tile from "./Tile";
 
-class Tiles extends React.Component {
+class Cluster extends React.Component {
     render() {
         const tilesData = this.props.tiles;
 
@@ -11,4 +11,4 @@ class Tiles extends React.Component {
     }
 }
 
-export default Tiles;
+export default Cluster;

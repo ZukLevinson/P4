@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 class Button extends React.Component {
     render() {
@@ -6,8 +12,10 @@ class Button extends React.Component {
 
         return (
             <div style={buttonStyle}>
-                <img src={icon} alt={title} style={imgStyle}/>
-                <p>{title}</p>
+                <Link to={this.props.link}>
+                    <img src={icon} alt={title} style={imgStyle}/>
+                    <p>{title}</p>
+                </Link>
             </div>
         );
     }

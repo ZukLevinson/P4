@@ -10,7 +10,7 @@ class TileSection extends React.Component {
                 data.push([key, field[key]]);
             }
         }
-        console.log(data)
+
         return (
             <div style={listStyle} key={field.kind}>
                 <p style={titleStyle}>{field.kind}</p>
