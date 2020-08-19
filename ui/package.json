@@ -34,7 +34,9 @@
   },
   "devDependencies": {
     "axios": "^0.19.2",
+    "prop-types": "^15.7.2",
     "react-cookie": "^4.0.3",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.0.0"
   }
 }

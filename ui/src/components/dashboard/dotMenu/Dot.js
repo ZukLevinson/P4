@@ -1,11 +1,12 @@
 import React from 'react';
+import {HashLink as Link} from 'react-router-hash-link';
 
 class Dot extends React.Component {
     render() {
         return (
-            <div style={btnStyle} className="dot_button">
+            <Link to={`/dashboard#${this.props.cluster}`} style={btnStyle} className="dot_button">
                 <div style={dotStyle} className="dot"/>
-            </div>
+            </Link>
         );
     }
 }

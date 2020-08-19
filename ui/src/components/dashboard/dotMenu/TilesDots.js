@@ -3,14 +3,14 @@ import Dot from "./Dot";
 
 class Dots extends React.Component {
     render() {
-        const tilesClusters = [];
-        for (let i = 0; i < Math.ceil(this.props.num / 4); i++) {
-            tilesClusters.push(i);
+        const clusters = [];
+        for (let i = 0; i < this.props.num; i++) {
+            clusters.push(i);
         }
-        if(tilesClusters.length !== 1){
+        if(clusters.length !== 1){
             return (
                 <div style={containerStyle}>
-                    {tilesClusters.map((obj) => (
+                    {clusters.map((obj) => (
                         <Dot key={obj} cluster={'cluster' + obj}/>
                     ))}
                 </div>
