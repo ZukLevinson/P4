@@ -22,13 +22,6 @@ class Header extends React.Component {
 
     componentDidMount() {
         setInterval(() => this.currentTime(), 1000);
-
-        axios.get(`http://localhost:8080/api/test`)
-            .then(res => {
-                const persons = res.data;
-                this.setState({persons});
-                console.log(persons["msg"])
-            })
     }
 
     render() {
@@ -63,7 +56,7 @@ class Header extends React.Component {
             name: 'Example'
         }
         const userInfo = {
-            name: 'Israel Israeli'
+            name: localStorage.getItem('fullName')
         }
 
         return (

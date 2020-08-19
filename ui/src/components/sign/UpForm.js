@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 import './formStyle.css';
+
+axios.defaults.withCredentials = true;
 
 class UpForm extends React.Component {
     constructor(props) {
@@ -11,8 +14,13 @@ class UpForm extends React.Component {
                 email_in: '',
                 short_name: '',
                 team_id: '',
-                auth:false,
-                msg:''
+                full_name: '',
+                password: '',
+                auth: false,
+                signed: false,
+                msg: '',
+                title: '',
+                department: ''
             };
     }
 
@@ -24,10 +32,10 @@ class UpForm extends React.Component {
         const userData = this.state;
         axios.post(`http://localhost:8080/api/validate/user`, userData)
             .then(res => {
-                if(res.data.userValid){
-                    this.setState({auth: true, msg:''});
-                }else{
-                    this.setState({auth: false, msg:'No user found'});
+                if (res.data.userValid) {
+                    this.setState({auth: true, msg: '', title: res.data.title, department: res.data.department});
+                } else {
+                    this.setState({auth: false, msg: 'No user found'});
                 }
             })
         event.preventDefault();
@@ -36,30 +44,46 @@ class UpForm extends React.Component {
         const userData = this.state;
         axios.post(`http://localhost:8080/api/sign-up`, userData)
             .then(res => {
-                console.log(res.data)
+                if (res.data.signed) {
+                    localStorage.setItem('fullName', res.data.full_name);
+                    this.setState({signed: true, msg: ''});
+                } else {
+                    this.setState({signed: false, msg: 'Sign up failed'});
+                }
             })
         event.preventDefault();
+    }
+
+    renderRedirect() {
+        if (this.state.signed) {
+            return <Redirect to='/dashboard'/>
+        }
     }
 
     render() {
         if (this.state.auth) {
             return (
                 <form onSubmit={this.handleSignUpSubmit} style={formStyle}>
+                    {this.renderRedirect()}
                     <div style={inputStyle}>
                         <p>Name</p>
-                        <input type="text"  onChange={this.handleChange} name="full_name" autoComplete="name"/>
+                        <input type="text" onChange={this.handleChange} name="full_name" autoComplete="name"/>
                     </div>
                     <div style={inputStyle}>
                         <p>Password</p>
-                        <input type="password"  onChange={this.handleChange} name="password" autoComplete="password"/>
+                        <input type="password" onChange={this.handleChange} name="password"
+                               autoComplete="new-password"/>
                     </div>
                     <div style={inputStyle}>
                         <p>Position</p>
                         <div style={rowStyle}>
-                            <input type="text" name="title" value="Team Manager" disabled/>
+                            <input type="text" name="title" value={this.state.title} disabled/>
                             <p style={{margin: '0 20px'}}>at</p>
-                            <input type="text" name="department" value="Cyber Security" disabled/>
+                            <input type="text" name="department" value={this.state.department} disabled/>
                         </div>
+                    </div>
+                    <div style={errStyle}>
+                        <p>{this.state.msg}</p>
                     </div>
                     <input type="submit" value="Submit"/>
                 </form>
@@ -105,10 +129,10 @@ const rowStyle = {
     flexDirection: 'row'
 }
 const errStyle = {
-    width:'100%',
-    minHeight:'30px',
-    color:'#B40A1B',
-    textAlign:'center'
+    width: '100%',
+    minHeight: '30px',
+    color: '#B40A1B',
+    textAlign: 'center'
 }
 
 export default UpForm;

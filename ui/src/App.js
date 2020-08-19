@@ -1,5 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import axios from 'axios';
+
 import Header from "./components/header/Header";
 import Dashboard from "./components/dashboard/Dashboard";
 import SignIn from "./components/sign/SignIn";

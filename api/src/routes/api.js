@@ -6,6 +6,11 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Business = require('../models/Business');
 
+//Validate business token
+router.get('/validate', async (req,res,next)=>{
+    authBusinessCookie(req) !== false ? res.json({bc:true}).end() : res.json({bc:false}).end();
+})
+
 //Validate User In Business
 router.post('/validate/user', async (req, res, next) => {
     const business = await Business.find(
@@ -15,7 +20,7 @@ router.post('/validate/user', async (req, res, next) => {
             "workforce.workers.email": req.body.email_in
         }
     );
-    console.log(req)
+
     if (business.length === 0) return res.json({
         userValid: false
     }).end();
@@ -37,7 +42,7 @@ router.post('/validate/user', async (req, res, next) => {
             },
             process.env.BUSINESS_TOKEN_SECRET);
         return res.status(201).cookie('business_token', token).json({
-            userValid: true
+            userValid: true, title: worker[0].title, department: team.department
         })
     } catch (err) {
         console.log(err);
@@ -46,31 +51,41 @@ router.post('/validate/user', async (req, res, next) => {
 
 //Sign Up
 router.post('/sign-up', async (req, res, next) => {
-    const auth = authBusinessCookie(parseCookies(req));
-    console.log(parseCookies(req))
-    if (auth) {
+    const token = authBusinessCookie(req)
+
+    if (token !== false) {
         const user = new User(
             {
                 full_name: req.body.full_name,
-                password: bcrypt.hash(req.body.password, 10),
+                password: bcrypt.hashSync(req.body.password, 10),
                 contact: {
                     email: req.body.email_in
                 },
-                business_id: 0
+                position: {
+                    department: token.department,
+                    title: token.title,
+                    team_id: token.team_id
+                },
+                business_id: token.business_id
             }
         )
+        user.save().then(() => {
+            res.json({signed: true,full_name:req.body.full_name}).end()
+        }).catch((err) => {
+            res.json({signed: false});
+            console.log(err)
+        });
     } else {
         res.status(400).end();
     }
 })
 
-router.get('/test', async (req, res) => {
-    res.json({msg: 'hello'}).end();
-})
-
 //Authenticate Business Cookie
 function authBusinessCookie(cookies) {
+    cookies = parseCookies(cookies);
     if ("business_token" in cookies) {
+        if(cookies.business_token === '') return false;
+        console.log(jwt.verify(cookies.business_token, process.env.BUSINESS_TOKEN_SECRET))
         return jwt.verify(cookies.business_token, process.env.BUSINESS_TOKEN_SECRET);
     } else {
         return false;
@@ -82,11 +97,10 @@ function parseCookies(request) {
     let list = {},
         rc = request.headers.cookie;
 
-    rc && rc.split(';').forEach(function( cookie ) {
+    rc && rc.split(';').forEach(function (cookie) {
         let parts = cookie.split('=');
         list[parts.shift().trim()] = decodeURI(parts.join('='));
     });
-
     return list;
 }
 
