@@ -304,7 +304,6 @@ class Dashboard extends React.Component {
                     }
                 ]
             }
-
         ]
 
         return (
