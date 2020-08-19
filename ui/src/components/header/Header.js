@@ -83,7 +83,7 @@ class Header extends React.Component {
                 <div className="bottom_menu_right" style={bottomSidesStyle}>
                     <div className="user_info">
                         <p>{this.state.time.toLocaleTimeString()}</p>
-                        {/*<p>{userInfo.name}</p>*/}
+                        <p>{userInfo.name}</p>
                     </div>
                 </div>
             </div>

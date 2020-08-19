@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Business = require('../models/Business');
 
-//Validate Business Id
+//Validate User In Business
 router.post('/validate/user', async (req, res, next) => {
     const business = await Business.find(
         {
@@ -15,10 +15,10 @@ router.post('/validate/user', async (req, res, next) => {
             "workforce.workers.email": req.body.email_in
         }
     );
-
-    if (business.length === 0) return res.status(400).json({
+    console.log(req)
+    if (business.length === 0) return res.json({
         userValid: false
-    });
+    }).end();
     try {
         const team = business[0].workforce.filter(obj => {
             return obj.team_id === req.body.team_id;
@@ -45,28 +45,44 @@ router.post('/validate/user', async (req, res, next) => {
 });
 
 //Sign Up
-router.get('/authenticate', async (req, res) => {
-    const cookies = parseCookies(req);
-    console.log(cookies)
-    ;
-    if ("business_token" in cookies) {
-        console.log(jwt.verify(cookies.business_token,process.env.BUSINESS_TOKEN_SECRET));
+router.post('/sign-up', async (req, res, next) => {
+    const auth = authBusinessCookie(parseCookies(req));
+    console.log(parseCookies(req))
+    if (auth) {
+        const user = new User(
+            {
+                full_name: req.body.full_name,
+                password: bcrypt.hash(req.body.password, 10),
+                contact: {
+                    email: req.body.email_in
+                },
+                business_id: 0
+            }
+        )
     } else {
-        res.json({'exist': 'false',})
+        res.status(400).end();
     }
-    res.end();
 })
 
-router.get('/test',async (req,res)=>{
-    res.json({msg:'hello'}).end();
+router.get('/test', async (req, res) => {
+    res.json({msg: 'hello'}).end();
 })
+
+//Authenticate Business Cookie
+function authBusinessCookie(cookies) {
+    if ("business_token" in cookies) {
+        return jwt.verify(cookies.business_token, process.env.BUSINESS_TOKEN_SECRET);
+    } else {
+        return false;
+    }
+}
 
 //Parse cookies
 function parseCookies(request) {
     let list = {},
         rc = request.headers.cookie;
 
-    rc && rc.split(';').forEach(function (cookie) {
+    rc && rc.split(';').forEach(function( cookie ) {
         let parts = cookie.split('=');
         list[parts.shift().trim()] = decodeURI(parts.join('='));
     });

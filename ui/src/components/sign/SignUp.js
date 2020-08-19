@@ -10,14 +10,10 @@ class SignUp extends React.Component {
                 <div style={titleStyle}>
                     <p>Sign up</p>
                 </div>
-                {<UpForm auth={authentication()}/>}
+                {<UpForm/>}
             </div>
         );
     }
-}
-function authentication() {
-    console.log('//auth//')
-    return false;
 }
 
 const containerStyle = {
