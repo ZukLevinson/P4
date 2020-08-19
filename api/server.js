@@ -22,6 +22,17 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(cookieParser());
 
+// app.all("*", (req,res, next) => {
+//     // cookie doesn't exist redirect to login
+//     if(authBusinessCookie(req)){
+//         console.log(123)
+//         // how to pass to the next layer ? load the routes below code etc..
+//         next();
+//     }else{
+//         res.redirect("/sign-in")
+//     }
+// })
+
 //Routes Middleware
 app.use('/api', api);
 

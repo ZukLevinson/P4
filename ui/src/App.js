@@ -19,9 +19,6 @@ class App extends React.Component {
                             <Header/>
                             <Dashboard/>
                         </Route>
-                        <Route path="/home">
-
-                        </Route>
                         <Route path="/sign-in">
                             <MainBox children={<SignIn/>}/>
                         </Route>
