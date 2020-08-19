@@ -7,8 +7,8 @@ const User = require('../models/User');
 const Business = require('../models/Business');
 
 //Validate business token
-router.get('/validate', async (req,res,next)=>{
-    authBusinessCookie(req) !== false ? res.json({bc:true}).end() : res.json({bc:false}).end();
+router.get('/validate', async (req, res, next) => {
+    authBusinessCookie(req) !== false ? res.json({bc: true}).end() : res.json({bc: false}).end();
 })
 
 //Validate User In Business
@@ -70,7 +70,7 @@ router.post('/sign-up', async (req, res, next) => {
             }
         )
         user.save().then(() => {
-            res.json({signed: true,full_name:req.body.full_name}).end()
+            res.json({signed: true, full_name: req.body.full_name}).end()
         }).catch((err) => {
             res.json({signed: false});
             console.log(err)
@@ -80,11 +80,51 @@ router.post('/sign-up', async (req, res, next) => {
     }
 })
 
+//Sign In
+router.post('/sign-in', async (req, res, next) => {
+    const user = await User.find(
+        {
+            "contact": {
+                "email": req.body.email_in
+            }
+        }
+    );
+
+    if (user.length === 0) return res.json({
+        userValid: false,
+        msg: 'Email not found'
+    }).end();
+
+    try {
+        if (await bcrypt.compare(req.body.password, user[0].password)) {
+            const token = await jwt.sign({
+                    email: user[0].contact.email_in,
+                    team_id: user[0].position.team_id,
+                    department: user[0].position.department,
+                    title: user[0].position.title,
+                    business_id: user[0].business_id,
+                    worker_id: user[0]._id
+                },
+                process.env.ACCESS_TOKEN_SECRET);
+            return res.status(201).cookie('business_token', token).json({
+                userValid: true, full_name: user[0].full_name
+            }).end();
+        } else {
+            return res.json({
+                userValid: false,
+                msg: 'Password incorrect'
+            }).end();
+        }
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 //Authenticate Business Cookie
 function authBusinessCookie(cookies) {
     cookies = parseCookies(cookies);
     if ("business_token" in cookies) {
-        if(cookies.business_token === '') return false;
+        if (cookies.business_token === '') return false;
         console.log(jwt.verify(cookies.business_token, process.env.BUSINESS_TOKEN_SECRET))
         return jwt.verify(cookies.business_token, process.env.BUSINESS_TOKEN_SECRET);
     } else {

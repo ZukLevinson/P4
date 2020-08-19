@@ -2,7 +2,6 @@ import React from 'react';
 import Button from "./Button";
 import VerticalLine from "./VerticalLine";
 import Company from "./Company";
-import axios from 'axios';
 
 class Header extends React.Component {
     constructor() {
