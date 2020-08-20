@@ -3,10 +3,6 @@ import HorizontalLine from "./HorizontalLine";
 import axios from 'axios';
 
 class TileSection extends React.Component {
-    onClickHandler = () => {
-        axios.get('http://localhost:8080/api/user').then(console.log);
-    }
-
     render() {
         const field = this.props.data;
         const data = [];
@@ -17,8 +13,7 @@ class TileSection extends React.Component {
         }
 
         return (
-
-            <div style={listStyle} key={field.kind} onClick={this.onClickHandler}>
+            <div style={listStyle} key={field.kind}>
                 <p style={titleStyle}>{field.kind}</p>
                 <table style={tblStyle}>
                     <tbody>
