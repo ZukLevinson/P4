@@ -1,6 +1,5 @@
 import React from 'react';
 import HorizontalLine from "./HorizontalLine";
-import axios from 'axios';
 
 class TileSection extends React.Component {
     render() {

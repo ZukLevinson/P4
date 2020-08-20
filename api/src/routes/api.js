@@ -96,24 +96,32 @@ router.post('/sign-in', async (req, res, next) => {
     }).end();
 
     try {
-        if (await bcrypt.compare(req.body.password, user[0].password)) {
-            const token = await jwt.sign({
-                    email: user[0].contact.email_in,
-                    team_id: user[0].position.team_id,
-                    department: user[0].position.department,
-                    title: user[0].position.title,
-                    business_id: user[0].business_id
-                },
-                process.env.BUSINESS_TOKEN_SECRET);
-            return res.status(201).cookie('business_token', token).json({
-                userValid: true, full_name: user[0].full_name
-            }).end();
+        if(req.body.password !== ''){
+            if (await bcrypt.compare(req.body.password, user[0].password)) {
+                const token = await jwt.sign({
+                        email: user[0].contact.email_in,
+                        team_id: user[0].position.team_id,
+                        department: user[0].position.department,
+                        title: user[0].position.title,
+                        business_id: user[0].business_id
+                    },
+                    process.env.BUSINESS_TOKEN_SECRET);
+                return res.status(201).cookie('business_token', token).json({
+                    userValid: true, full_name: user[0].full_name
+                }).end();
+            } else {
+                return res.json({
+                    userValid: false,
+                    msg: 'Password incorrect'
+                }).end();
+            }
         } else {
             return res.json({
                 userValid: false,
-                msg: 'Password incorrect'
+                msg: 'Fill in password'
             }).end();
         }
+
     } catch (err) {
         console.log(err)
     }

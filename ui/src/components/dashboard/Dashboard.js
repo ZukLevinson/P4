@@ -1,6 +1,7 @@
 import React from 'react';
+
 import Cluster from "./Cluster";
-import Dots from "./dotMenu/TilesDots";
+import Dots from "./dotMenu/Dots";
 
 class Dashboard extends React.Component {
     render() {
@@ -207,7 +208,7 @@ class Dashboard extends React.Component {
             ,
             {
                 id: '2',
-                title: 'Finances',
+                title: 'Development',
                 tiles: [
                     {
                         title: 'Income',
@@ -311,7 +312,7 @@ class Dashboard extends React.Component {
                 {clusters.map((cluster) => (
                     <Cluster cluster={'cluster' + cluster.id} key={cluster.id} title={cluster.title} tiles={cluster.tiles}/>
                 ))}
-                <Dots num={clusters.length} clusters={clusters}/>
+                <Dots clusters={clusters}/>
             </div>
         )
     }

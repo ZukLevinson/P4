@@ -15,7 +15,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             auth: '',
-            redirect: '',
+            redirect: null,
             redirected: false
         }
     }
@@ -30,8 +30,11 @@ class App extends React.Component {
         if (this.state.auth === false) {
             this.setState({auth: '', redirect: <Redirect to='/sign-in'/>, redirected: true})
         } else {
-            if (this.state.redirected) this.setState({redirect: '', redirected: false})
+            if (this.state.redirected) this.setState({redirect:null , redirected: false})
         }
+    }
+    componentWillUnmount() {
+        this.setState({redirect:null});
     }
 
     render() {

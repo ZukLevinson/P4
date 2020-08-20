@@ -36,7 +36,7 @@ class SignIn extends React.Component {
 
     renderRedirect() {
         if (this.state.signed) {
-            return <Redirect to='/dashboard'/>
+            return <Redirect to='/dashboard#cluster0'/>
         }
     }
     render() {
