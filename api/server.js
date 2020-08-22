@@ -7,7 +7,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 
-const port = 8080;
+const port = process.env.SERVER_PORT;
 
 //Import Routes
 const api = require('./src/routes/api');
@@ -21,15 +21,12 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(cookieParser());
 
-app.all("/api/user", async (req, res, next) => {
-    api.authBusinessCookie(req).then((tkn) =>{
-        res.json({auth:tkn}).end();
-    })
+app.all("/api/validate", async (req, res, next) => {
+    api.isUserExistsByToken(req, res).then(tkn => res.json({auth: tkn}).end()).catch(err => console.log('ERROR: ' + err));
 })
 
 //Routes Middleware
 app.use('/api', api.router);
-
 
 app.listen(port, function () {
     console.log(`Listening on http://localhost:` + port);

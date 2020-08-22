@@ -6,12 +6,27 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Business = require('../models/Business');
 
-//Validate business token
-router.get('/validate', async (req, res, next) => {
-    authBusinessCookie(req) !== false ? res.json({bc: true}).end() : res.json({bc: false}).end();
-})
+var ObjectId = require('mongoose').Types.ObjectId;
 
-//Validate User In Business
+//Validate User's cookie
+module.exports.isUserExistsByToken = async function (req) {
+    return authBusinessCookie(req).then(tkn => {
+        if (tkn !== false) {
+            return findUserByToken(tkn).then(result => {
+                return result;
+            }).catch(err => {
+                console.log('FIND ERROR: ' + err);
+                return false;
+            });
+        }
+        return (tkn);
+    }).catch(err => {
+        console.log('AUTH ERROR: ' + err)
+        return false;
+    })
+}
+
+//Validate that User In Business
 router.post('/validate/user', async (req, res, next) => {
     const business = await Business.find(
         {
@@ -50,34 +65,34 @@ router.post('/validate/user', async (req, res, next) => {
 
 //Sign Up
 router.post('/sign-up', async (req, res, next) => {
-    const token = authBusinessCookie(req)
+    authBusinessCookie(req).then(tkn => {
+        if (tkn !== false) {
+            const user = new User(
+                {
+                    full_name: req.body.full_name,
+                    password: bcrypt.hashSync(req.body.password, 10),
+                    contact: {
+                        email: req.body.email_in
+                    },
+                    position: {
+                        department: tkn.department,
+                        title: tkn.title,
+                        team_id: tkn.team_id
+                    },
+                    business_id: tkn.business_id
+                }
+            )
 
-    if (token !== false) {
-        const user = new User(
-            {
-                full_name: req.body.full_name,
-                password: bcrypt.hashSync(req.body.password, 10),
-                contact: {
-                    email: req.body.email_in
-                },
-                position: {
-                    department: token.department,
-                    title: token.title,
-                    team_id: token.team_id
-                },
-                business_id: token.business_id
-            }
-        )
-
-        user.save().then(() => {
-            res.json({signed: true, full_name: req.body.full_name}).end()
-        }).catch((err) => {
-            res.json({signed: false});
-            console.log(err)
-        });
-    } else {
-        res.status(400).end();
-    }
+            user.save().then(() => {
+                res.json({signed: true, full_name: req.body.full_name}).end()
+            }).catch((err) => {
+                res.json({signed: false});
+                console.log(err)
+            });
+        } else {
+            res.status(400).end();
+        }
+    })
 })
 
 //Sign In
@@ -96,10 +111,10 @@ router.post('/sign-in', async (req, res, next) => {
     }).end();
 
     try {
-        if(req.body.password !== ''){
+        if (req.body.password !== '') {
             if (await bcrypt.compare(req.body.password, user[0].password)) {
                 const token = await jwt.sign({
-                        email: user[0].contact.email_in,
+                        email: user[0].contact.email,
                         team_id: user[0].position.team_id,
                         department: user[0].position.department,
                         title: user[0].position.title,
@@ -127,17 +142,39 @@ router.post('/sign-in', async (req, res, next) => {
     }
 })
 
-module.exports.authBusinessCookie = function (cookies) {
-    return new Promise(resolve => {
+function authBusinessCookie(cookies) {
+    return new Promise((resolve, reject) => {
         cookies = parseCookies(cookies);
         if ("business_token" in cookies) {
             if (cookies.business_token === '') resolve(false);
             jwt.verify(cookies.business_token.toString(), process.env.BUSINESS_TOKEN_SECRET, function (err, decoded) {
-                resolve(err === null ? decoded : false);
+                if (err === null) {
+                    resolve(decoded);
+                } else {
+                    reject(false);
+                }
             });
         } else {
-            resolve(false);
+            reject(false);
         }
+    })
+}
+
+function findUserByToken(token) {
+    return new Promise((resolve, reject) => {
+        Business.find(
+            {
+                _id: new ObjectId(token.business_id),
+                "workforce.team_id": token.team_id,
+                'workforce.workers.email': token.email
+            }
+        ).then(business => {
+            if (business.length > 0) {
+                resolve(true);
+            } else {
+                reject('User not found');
+            }
+        }).catch(reject)
     })
 }
 

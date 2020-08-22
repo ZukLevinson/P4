@@ -24,7 +24,7 @@ class Dot extends React.Component {
                 background: '#2E2E2E',
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                transition: '0.2s ease-in-out'
+                transition: '0.1s ease-in-out'
             }
 
 
@@ -37,7 +37,7 @@ class Dot extends React.Component {
                     background: '#2E2E2E',
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    transition: '0.2s ease-in-out'
+                    transition: '0.1s ease-in-out'
                 }
 
             } else {
@@ -48,7 +48,7 @@ class Dot extends React.Component {
                     background: '#2E2E2E',
                     marginLeft: 'auto',
                     marginRight: 'auto',
-                    transition: '0.2s ease-in-out'
+                    transition: '0.1s ease-in-out'
                 }
             }
         }
