@@ -15,46 +15,13 @@ class Header extends React.Component {
         })
     }
 
-    state = {
-        persons: []
-    }
-
     componentDidMount() {
         setInterval(() => this.currentTime(), 1000);
     }
 
     render() {
-        const buttons = [{
-            title: 'BTN 1',
-            icon: './img/icons/house.png',
-            link: '/dashboard#cluster0',
-            hash: '#cluster0',
-            id: '1'
-        }, {
-            title: 'BTN 2',
-            icon: './img/icons/pie-chart.png',
-            link: '/pie-chart',
-            hash: '',
-            id: '2'
-        }, {
-            title: 'BTN 3',
-            icon: './img/icons/upload-1.png',
-            link: '/upload-1',
-            hash: '',
-            id: '3'
-        }, {
-            title: 'BTN 4',
-            icon: './img/icons/vector.png',
-            link: '/vector',
-            hash: '',
-            id: '4'
-        }, {
-            title: 'BTN 5',
-            icon: './img/icons/download-1.png',
-            link: '/download-1',
-            hash: '',
-            id: '5'
-        }]
+        const buttons = this.props.layout;
+
         const companyInfo = {
             icon: './img/Picture3.png',
             name: 'Example'

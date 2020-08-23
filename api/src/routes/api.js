@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
+let ObjectId = require('mongoose').Types.ObjectId;
 
 //Models
 const User = require('../models/User');
 const Business = require('../models/Business');
-
-var ObjectId = require('mongoose').Types.ObjectId;
+const Layout = require('../models/Layout');
 
 //Validate User's cookie
 module.exports.isUserExistsByToken = async function (req) {
@@ -27,7 +27,7 @@ module.exports.isUserExistsByToken = async function (req) {
 }
 
 //Validate that User In Business
-router.post('/validate/user', async (req, res, next) => {
+router.post('/validate/user', async (req, res) => {
     const business = await Business.find(
         {
             "short_name": req.body.short_name,
@@ -52,7 +52,8 @@ router.post('/validate/user', async (req, res, next) => {
                 team_id: team.team_id,
                 department: team.department,
                 title: worker[0].title,
-                business_id: business[0]._id
+                business_id: business[0]._id,
+                worker_id: worker[0].id
             },
             process.env.BUSINESS_TOKEN_SECRET);
         return res.status(201).cookie('business_token', token).json({
@@ -63,8 +64,8 @@ router.post('/validate/user', async (req, res, next) => {
     }
 });
 
-//Sign Up
-router.post('/sign-up', async (req, res, next) => {
+//Sign Up action
+router.post('/sign-up', async (req, res) => {
     authBusinessCookie(req).then(tkn => {
         if (tkn !== false) {
             const user = new User(
@@ -79,7 +80,8 @@ router.post('/sign-up', async (req, res, next) => {
                         title: tkn.title,
                         team_id: tkn.team_id
                     },
-                    business_id: tkn.business_id
+                    business_id: tkn.business_id,
+                    worker_id: tkn.worker_id
                 }
             )
 
@@ -95,8 +97,8 @@ router.post('/sign-up', async (req, res, next) => {
     })
 })
 
-//Sign In
-router.post('/sign-in', async (req, res, next) => {
+//Sign In action
+router.post('/sign-in', async (req, res) => {
     const user = await User.find(
         {
             "contact": {
@@ -118,7 +120,8 @@ router.post('/sign-in', async (req, res, next) => {
                         team_id: user[0].position.team_id,
                         department: user[0].position.department,
                         title: user[0].position.title,
-                        business_id: user[0].business_id
+                        business_id: user[0].business_id,
+                        worker_id: user[0].worker_id
                     },
                     process.env.BUSINESS_TOKEN_SECRET);
                 return res.status(201).cookie('business_token', token).json({
@@ -142,6 +145,37 @@ router.post('/sign-in', async (req, res, next) => {
     }
 })
 
+//Get User Layout By URL
+router.get('/user/layout', async (req, res) => {
+    return authBusinessCookie(req).then(tkn => {
+        return new Promise((resolve, reject) => {
+            findUserLayoutByToken(tkn,"dashboard").then(result => res.json({result: result})).catch(err=>res.json({error: err}));
+        })
+    })
+})
+
+function findUserLayoutByToken(token, title, att) {
+    return new Promise((resolve, reject) => {
+        Layout.find(
+            {
+                "user_id": token.worker_id,
+                "business_id": token.business_id
+            }
+        ).then(business => {
+            if (business.length > 0) {
+                const layout = business[0].layout;
+                for (let i = 0; i < layout.length; i++) {
+                    if (layout[i].id === title) resolve(layout[i].buttons);
+                }
+            } else {
+                reject('Layout not found');
+            }
+        }).catch(reject)
+    })
+}
+
+
+//Authenticate BC
 function authBusinessCookie(cookies) {
     return new Promise((resolve, reject) => {
         cookies = parseCookies(cookies);
@@ -160,6 +194,7 @@ function authBusinessCookie(cookies) {
     })
 }
 
+//Find User according to decoded token
 function findUserByToken(token) {
     return new Promise((resolve, reject) => {
         Business.find(

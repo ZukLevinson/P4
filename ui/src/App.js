@@ -16,13 +16,25 @@ class App extends React.Component {
         this.state = {
             auth: '',
             redirect: null,
-            redirected: false
+            redirected: false,
+            layout:[]
         }
     }
 
     componentDidMount() {
         axios.get('http://localhost:8080/api/validate').then((data) => {
             this.setState({auth: data.data.auth});
+        }).catch(err => console.log(err))
+        axios.get('http://localhost:8080/api/user/layout').then((data) => {
+            if (data.data.result !== undefined) {
+                this.setState({
+                    layout: data.data.result
+                })
+            } else {
+                this.setState({
+                    layout: data.data.error
+                })
+            }
         }).catch(err => console.log(err))
     }
 
@@ -44,7 +56,7 @@ class App extends React.Component {
                     <Switch>
                         {this.state.redirect}
                         <Route path="/dashboard">
-                            <Header/>
+                            <Header layout={this.state.layout}/>
                             <Dashboard/>
                         </Route>
                         <Route path="/sign-in">

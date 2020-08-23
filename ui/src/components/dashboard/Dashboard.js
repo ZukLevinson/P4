@@ -4,6 +4,13 @@ import Cluster from "./Cluster";
 import Dots from "./dotMenu/Dots";
 
 class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            buttons: []
+        }
+    }
+
     render() {
         const clusters = [
             {
@@ -310,7 +317,8 @@ class Dashboard extends React.Component {
         return (
             <div style={dashStyle}>
                 {clusters.map((cluster) => (
-                    <Cluster cluster={'cluster' + cluster.id} key={cluster.id} title={cluster.title} tiles={cluster.tiles}/>
+                    <Cluster cluster={'cluster' + cluster.id} key={cluster.id} title={cluster.title}
+                             tiles={cluster.tiles}/>
                 ))}
                 <Dots clusters={clusters}/>
             </div>
@@ -324,7 +332,7 @@ const dashStyle = {
     overflow: 'hidden',
     background: '#FBFBFB',
     whiteSpace: 'nowrap',
-    scrollBehavior:'smooth'
+    scrollBehavior: 'smooth'
 }
 
 export default Dashboard;
