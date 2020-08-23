@@ -7,6 +7,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import SignIn from "./components/sign/SignIn";
 import SignUp from "./components/sign/SignUp";
 import MainBox from "./components/sign/mainBox";
+import Orders from "./components/orders/Orders";
 
 import './App.css';
 
@@ -65,7 +66,8 @@ class App extends React.Component {
                         </Route>
                         <Route path="/vector">
                         </Route>
-                        <Route path="/download">
+                        <Route path="/orders">
+                            <Orders/>
                         </Route>
                     </Switch>
                 </Router>

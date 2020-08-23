@@ -1,15 +1,17 @@
-[{
-  "_id": {
-    "$oid": "5f2b03983f33f280f29f60da"
-  },
-  "full_name": {
-    "first": "Jess",
-    "last": "Shtien"
-  },
-  "position": {
-    "department": "Optimization",
-    "title": "Software Engineer",
-    "team_id": ""
-  },
-  "business_id": "5f2b011fe189c7119cbb35b2"
-}]
+[
+  {
+    "_id": {
+      "$oid": "5f2b03983f33f280f29f60da"
+    },
+    "full_name": {
+      "first": "Jess",
+      "last": "Shtien"
+    },
+    "position": {
+      "department": "Optimization",
+      "title": "Software Engineer",
+      "team_id": ""
+    },
+    "business_id": "5f2b011fe189c7119cbb35b2"
+  }
+]

@@ -154,7 +154,12 @@ router.get('/user/layout', async (req, res) => {
     })
 })
 
-function findUserLayoutByToken(token, title, att) {
+//Get Business Orders By Department
+
+
+
+//Find User's Layout according to decoded token and title of layout component
+function findUserLayoutByToken(token, title) {
     return new Promise((resolve, reject) => {
         Layout.find(
             {
@@ -173,7 +178,6 @@ function findUserLayoutByToken(token, title, att) {
         }).catch(reject)
     })
 }
-
 
 //Authenticate BC
 function authBusinessCookie(cookies) {

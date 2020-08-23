@@ -1,52 +1,54 @@
-[{
-  "_id": {
-    "$oid": "5f2b011fe189c7119cbb35b2"
-  },
-  "business": {
-    "kind": "Factory",
-    "size": "Medium",
-    "fields": "Glass"
-  },
-  "full_name": "Domar Industries LTD",
-  "main_contact": {
-    "mail": "zuklevinson@gmail.com",
-    "phone": "03-5018207",
-    "website": "https://www.domar-ind.co.il/",
-    "fax": "077-4703000"
-  },
-  "short_name": "Domar",
-  "workforce": [
-    {
-      "department": "Cyber Security",
-      "team_id": "000",
-      "workers": [
-        {
-          "email": "zuklevinson@gmail.com",
-          "id": "1234",
-          "title": "Team Manager"
-        },
-        {
-          "id": "4321",
-          "email": "a@a.com",
-          "title": "Developer"
-        }
-      ]
+[
+  {
+    "_id": {
+      "$oid": "5f2b011fe189c7119cbb35b2"
     },
-    {
-      "department": "Cyber Security",
-      "team_id": "001",
-      "workers": [
-        {
-          "email": "zuklevinson@gmail.com",
-          "id": "1234",
-          "title": "Team Manager"
-        },
-        {
-          "id": "4321",
-          "email": "a@a.com",
-          "title": "Developer"
-        }
-      ]
-    }
-  ]
-}]
+    "business": {
+      "kind": "Factory",
+      "size": "Medium",
+      "fields": "Glass"
+    },
+    "full_name": "Domar Industries LTD",
+    "main_contact": {
+      "mail": "zuklevinson@gmail.com",
+      "phone": "03-5018207",
+      "website": "https://www.domar-ind.co.il/",
+      "fax": "077-4703000"
+    },
+    "short_name": "Domar",
+    "workforce": [
+      {
+        "department": "Cyber Security",
+        "team_id": "000",
+        "workers": [
+          {
+            "email": "zuklevinson@gmail.com",
+            "id": "1234",
+            "title": "Team Manager"
+          },
+          {
+            "id": "4321",
+            "email": "a@a.com",
+            "title": "Developer"
+          }
+        ]
+      },
+      {
+        "department": "Cyber Security",
+        "team_id": "001",
+        "workers": [
+          {
+            "email": "zuklevinson@gmail.com",
+            "id": "1234",
+            "title": "Team Manager"
+          },
+          {
+            "id": "4321",
+            "email": "a@a.com",
+            "title": "Developer"
+          }
+        ]
+      }
+    ]
+  }
+]
