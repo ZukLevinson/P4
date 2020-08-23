@@ -15,7 +15,7 @@ class Dots extends React.Component {
         }
     }
     handleClick = (title) => {
-        if(this.state.click !== title) this.setState({click:title});
+        if (this.state.click !== title) this.setState({click: title});
     }
 
     render() {
@@ -28,7 +28,8 @@ class Dots extends React.Component {
                     <div style={containerStyle}>
                         {clusters.map((cluster) => (
                             <Dot key={cluster.id} cluster={'cluster' + cluster.id} title={cluster.title}
-                                 hovered={this.handleHover} clicked={this.state.click===cluster.title} current={this.handleClick}/>
+                                 hovered={this.handleHover} clicked={this.state.click === cluster.title}
+                                 current={this.handleClick}/>
                         ))}
                     </div>
                 </div>
@@ -48,15 +49,15 @@ const containerStyle = {
 
     marginLeft: 'auto',
     marginRight: 'auto',
-    left:'0',
-    right:'0',
-    marginTop:'10px',
+    left: '0',
+    right: '0',
+    marginTop: '10px',
 
     display: 'inline-flex',
     flexDirection: 'row',
     alignItems: 'center',
-    position:'absolute',
-    bottom:'1vh'
+    position: 'absolute',
+    bottom: '1vh'
 }
 
 const labelStyle = {
@@ -71,7 +72,7 @@ const labelStyle = {
 
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom:'20px',
+    marginBottom: '20px',
 
     display: 'flex',
     justifyContent: 'center',
@@ -86,7 +87,7 @@ const menuStyle = {
     marginLeft: 'auto',
     marginRight: 'auto',
     bottom: '10vh',
-    display:'flex',
+    display: 'flex',
     flexDirection: 'column'
 }
 export default Dots;

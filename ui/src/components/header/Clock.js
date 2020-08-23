@@ -7,7 +7,7 @@ class Clock extends React.Component {
     }
 
     componentDidMount() {
-        localStorage.setItem('interId',setInterval(() => this.currentTime(), 1000));
+        localStorage.setItem('interId', setInterval(() => this.currentTime(), 1000));
     }
 
     currentTime() {

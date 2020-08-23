@@ -15,7 +15,7 @@ class Header extends React.Component {
     }
 
     render() {
-        if(this.props.show) {
+        if (this.props.show) {
             const buttons = JSON.parse(localStorage.getItem('dashBtn'));
 
             const companyInfo = {

@@ -12,7 +12,7 @@ class SignIn extends React.Component {
                 email_in: '',
                 password: '',
                 signed: false,
-                msg:''
+                msg: ''
             };
     }
 
@@ -39,6 +39,7 @@ class SignIn extends React.Component {
             return <Redirect to='/dashboard#cluster0'/>
         }
     }
+
     render() {
         return (
             <div style={containerStyle}>
@@ -53,7 +54,8 @@ class SignIn extends React.Component {
                     </div>
                     <div style={inputStyle}>
                         <p>Password:</p>
-                        <input type="password" onChange={this.handleChange} name="password" autoComplete="current-password"/>
+                        <input type="password" onChange={this.handleChange} name="password"
+                               autoComplete="current-password"/>
                     </div>
                     <div style={errStyle}>
                         <p>{this.state.msg}</p>

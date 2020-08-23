@@ -13,8 +13,8 @@ const business = new mongoose.Schema({
         department: {type: String},
         workers: [{
             id: {type: String},
-            email: {type:String},
-            title: {type:String}
+            email: {type: String},
+            title: {type: String}
         }]
     }],
     main_contact: {

@@ -149,7 +149,7 @@ router.post('/sign-in', async (req, res) => {
 router.get('/user/layout', async (req, res) => {
     return authBusinessCookie(req).then(tkn => {
         return new Promise((resolve, reject) => {
-            findUserLayoutByToken(tkn,"dashboard").then(result => res.json({result: result})).catch(err=>res.json({error: err}));
+            findUserLayoutByToken(tkn, "dashboard").then(result => res.json({result: result})).catch(err => res.json({error: err}));
         })
     })
 })

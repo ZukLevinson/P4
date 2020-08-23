@@ -26,9 +26,9 @@ const clusterStyle = {
     alignItems: 'flex-start'
 }
 const containerStyle = {
-    display:'inline-block',
-    width:'inherit',
-    height:'inherit'
+    display: 'inline-block',
+    width: 'inherit',
+    height: 'inherit'
 }
 
 export default Cluster;

@@ -5,6 +5,7 @@ class MainBox extends React.Component {
         super(props);
         this.props.header(false)
     }
+
     render() {
         return (
             <div style={mainStyle}>

@@ -40,8 +40,8 @@ class App extends React.Component {
     }
 
     handleHeader = (show) => {
-        this.setState({show_header:show})
-}
+        this.setState({show_header: show})
+    }
 
     render() {
         return (
@@ -60,7 +60,12 @@ class App extends React.Component {
                             <MainBox header={this.handleHeader} children={<SignUp/>}/>
                         </Route>
                         <Route path="/stats">
-                            <Header layout={this.state.layout}/>
+                        </Route>
+                        <Route path="/upload">
+                        </Route>
+                        <Route path="/vector">
+                        </Route>
+                        <Route path="/download">
                         </Route>
                     </Switch>
                 </Router>
