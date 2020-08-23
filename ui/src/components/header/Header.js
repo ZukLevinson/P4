@@ -2,56 +2,55 @@ import React from 'react';
 import Button from "./Button";
 import VerticalLine from "./VerticalLine";
 import Company from "./Company";
+import Clock from "./Clock";
+import axios from "axios";
 
 class Header extends React.Component {
-    constructor() {
-        super()
-        this.state = {time: new Date()}
-    }
+    constructor(props) {
+        super(props);
 
-    currentTime() {
-        this.setState({
-            time: new Date()
-        })
-    }
-
-    componentDidMount() {
-        setInterval(() => this.currentTime(), 1000);
+        axios.get('http://localhost:8080/api/user/layout').then((data) => {
+            localStorage.setItem('dashBtn', JSON.stringify(data.data.result !== undefined ? data.data.result : data.data.error));
+        }).catch(err => console.log(err))
     }
 
     render() {
-        const buttons = this.props.layout;
+        if(this.props.show) {
+            const buttons = JSON.parse(localStorage.getItem('dashBtn'));
 
-        const companyInfo = {
-            icon: './img/Picture3.png',
-            name: 'Example'
-        }
-        const userInfo = {
-            name: localStorage.getItem('fullName')
-        }
+            const companyInfo = {
+                icon: './img/Picture3.png',
+                name: 'Example'
+            }
+            const userInfo = {
+                name: localStorage.getItem('fullName')
+            }
 
-        return (
-            <div className="bottom_menu" style={bottomStyle}>
-                <div className="bottom_menu_left" style={bottomSidesStyle}>
-                    <Company data={companyInfo}/>
-                </div>
-                <div className="bottom_menu_middle" style={bottomMiddleStyle}>
-                    <VerticalLine/>
-                    <div className="buttons" style={buttonsStyle}>
-                        {buttons.map((btn) => (
-                            <Button data={btn} key={btn.id} link={btn.link}/>
-                        ))}
+            return (
+                <div className="bottom_menu" style={bottomStyle}>
+                    <div className="bottom_menu_left" style={bottomSidesStyle}>
+                        <Company data={companyInfo}/>
                     </div>
-                    <VerticalLine/>
-                </div>
-                <div className="bottom_menu_right" style={bottomSidesStyle}>
-                    <div className="user_info">
-                        <p>{this.state.time.toLocaleTimeString()}</p>
-                        <p>{userInfo.name}</p>
+                    <div className="bottom_menu_middle" style={bottomMiddleStyle}>
+                        <VerticalLine/>
+                        <div className="buttons" style={buttonsStyle}>
+                            {buttons.map((btn) => (
+                                <Button data={btn} key={btn.id} link={btn.link}/>
+                            ))}
+                        </div>
+                        <VerticalLine/>
+                    </div>
+                    <div className="bottom_menu_right" style={bottomSidesStyle}>
+                        <div className="user_info">
+                            <Clock/>
+                            <p>{userInfo.name}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return null;
+        }
     }
 }
 

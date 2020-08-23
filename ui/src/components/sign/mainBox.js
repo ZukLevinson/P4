@@ -1,6 +1,10 @@
 import React from 'react';
 
 class MainBox extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.header(false)
+    }
     render() {
         return (
             <div style={mainStyle}>

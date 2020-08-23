@@ -17,7 +17,7 @@ class App extends React.Component {
             auth: '',
             redirect: null,
             redirected: false,
-            layout:[]
+            show_header: true
         }
     }
 
@@ -25,17 +25,7 @@ class App extends React.Component {
         axios.get('http://localhost:8080/api/validate').then((data) => {
             this.setState({auth: data.data.auth});
         }).catch(err => console.log(err))
-        axios.get('http://localhost:8080/api/user/layout').then((data) => {
-            if (data.data.result !== undefined) {
-                this.setState({
-                    layout: data.data.result
-                })
-            } else {
-                this.setState({
-                    layout: data.data.error
-                })
-            }
-        }).catch(err => console.log(err))
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -49,24 +39,28 @@ class App extends React.Component {
         this.setState({redirect: null});
     }
 
+    handleHeader = (show) => {
+        this.setState({show_header:show})
+}
+
     render() {
         return (
             <div className="App">
                 <Router>
+                    <Header show={this.state.show_header}/>
                     <Switch>
                         {this.state.redirect}
                         <Route path="/dashboard">
-                            <Header layout={this.state.layout}/>
-                            <Dashboard/>
+                            <Dashboard header={this.handleHeader}/>
                         </Route>
                         <Route path="/sign-in">
-                            <MainBox children={<SignIn/>}/>
+                            <MainBox header={this.handleHeader} children={<SignIn/>}/>
                         </Route>
                         <Route path="/sign-up">
-                            <MainBox children={<SignUp/>}/>
+                            <MainBox header={this.handleHeader} children={<SignUp/>}/>
                         </Route>
-                        <Route path="/pie-chart">
-                            <Header/>
+                        <Route path="/stats">
+                            <Header layout={this.state.layout}/>
                         </Route>
                     </Switch>
                 </Router>

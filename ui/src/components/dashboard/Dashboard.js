@@ -6,9 +6,7 @@ import Dots from "./dotMenu/Dots";
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            buttons: []
-        }
+        this.props.header(true)
     }
 
     render() {
