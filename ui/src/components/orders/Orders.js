@@ -3,6 +3,8 @@ import React from 'react';
 import Order from "./Order";
 import HorizontalLine from "../dashboard/HorizontalLine";
 
+import './style.css';
+
 class Orders extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +24,24 @@ class Orders extends React.Component {
                         }
                     ],
                     status: {
-                        id: 'manufacturing',
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
                         percentage: '28'
                     }
                 }, {
@@ -40,7 +59,483 @@ class Orders extends React.Component {
                     ],
                     status: {
                         id: 'manufacturing',
-                        percentage: '0.28'
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '001',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'manufacturing',
+                        percentage: '68'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
+                    }
+                }, {
+                    business_id: '123',
+                    order_id: '000',
+                    products: [
+                        {
+                            id: '001',
+                            quantity: '2'
+                        },
+                        {
+                            id: '002',
+                            quantity: '3'
+                        }
+                    ],
+                    status: {
+                        id: 'ordered',
+                        percentage: '28'
                     }
                 }
             ],
@@ -48,31 +543,40 @@ class Orders extends React.Component {
         }
     }
 
-    componentDidMount() {
-    }
-
     render() {
         return (
             <div style={ordersStyle}>
                 <div style={containerStyle}>
-                    <p style={titleStyle}>Orders</p>
-                    <HorizontalLine/>
-                    <table style={tblStyle}>
-                        <tbody>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Products</th>
-                            <th>Order Status</th>
-                            <th>Expected</th>
-                        </tr>
-                        {this.state.data.map((order) => (
-                            <Order data={order} key={order.order_id}/>
-                        ))}
-                        </tbody>
-                    </table>
-                    <p style={footStyle}>
-                        Data updated at {this.state.timestamp.toLocaleTimeString()}
-                    </p>
+                    <div style={titleStyle}>
+                        <p style={{marginBottom: '10px'}}>Orders</p>
+                        <HorizontalLine/>
+                    </div>
+
+                    <div style={{flex:'1', height:'100%'}}>
+                        <table className="orders" style={tblStyle}>
+                            {/*<thead>*/}
+                            {/*<tr>*/}
+                            {/*    <th>Order ID</th>*/}
+                            {/*    <th>Products</th>*/}
+                            {/*    <th>Order Status</th>*/}
+                            {/*    <th>Expected</th>*/}
+                            {/*</tr>*/}
+                            {/*</thead>*/}
+                            <tbody style={{display:'block',overflowY:"scroll",height:'inherit',width:'inherit'}}>
+                            {this.state.data.map((order) => (
+                                <Order data={order} key={Math.random().toString(36).substr(2, 9)}/>
+                                // <Order data={order} key={order.order_id}/>
+                            ))}
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div style={footStyle}>
+                        <p>
+                            Data updated at {this.state.timestamp.toLocaleTimeString()}
+                        </p>
+                    </div>
+
                 </div>
             </div>
         );
@@ -84,29 +588,32 @@ const ordersStyle = {
     width: '100vw',
     overflow: 'hidden',
     background: '#FBFBFB',
+    display: 'flex',
+    flexDirection: 'row',
+}
+
+const containerStyle = {
+    margin:'20px',
+    flex:'1 1',
     display:'flex',
     flexDirection: 'column'
 }
 const tblStyle = {
-    width: '100%',
-    flex:'1'
-}
-const containerStyle = {
-    margin: '20px',
-    display:'flex',
-    flexDirection:'column',
-    flex:'1'
+    borderCollapse: 'collapse',
+    height:'inherit',
+    width:'100%',
 }
 
 const titleStyle = {
     fontSize: '40px',
     fontWeight: '200',
-    marginBottom: '10px'
+    height: '90px',
 }
 const footStyle = {
-    color:'gray',
+    color: 'gray',
     fontSize: '13px',
-    marginTop:'20px'
+    marginTop: '20px',
+    height: '20px'
 }
 
 export default Orders;

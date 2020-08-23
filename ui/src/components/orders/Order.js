@@ -6,28 +6,21 @@ class Order extends React.Component {
 
         return(
             <tr>
-                <td id="name">
+                <td id="name" style={{padding:'0 10px'}}>
                     {order_id}
                 </td>
-                <td id="products">
-                    {JSON.stringify(status)}
+                <td id="products" style={{padding:'0 10px'}}>
+                    {JSON.stringify(products)}
                 </td>
                 <td id="status">
                     <Progress data={status}/>
                 </td>
-                <td  id="expected">
+                <td  id="expected" style={{padding:'0 10px'}}>
                     expected
                 </td>
             </tr>
         );
     }
-}
-
-const progStyle = {
-    background:'blue',
-    height:'inherit',
-    width:'calc(inherit * )'
-
 }
 
 export default Order;

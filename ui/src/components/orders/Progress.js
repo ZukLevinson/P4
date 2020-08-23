@@ -3,6 +3,8 @@ import React from 'react';
 class Progress extends React.Component {
     getColor = (status) => {
         if (status === 'manufacturing') return 'rgba(232, 207, 44, 0.56)'
+        if (status === 'ordered') return 'rgba(44,151,232,0.56)'
+        if (status === 'shipped') return 'rgba(110,232,44,0.56)'
     }
 
     render() {
@@ -16,9 +18,9 @@ class Progress extends React.Component {
         }
 
         return (
-            <div style={{height: 'inherit'}}>
+            <div style={{position:'relative', height:"100%"}}>
                 <div style={progStyle}>&nbsp;</div>
-                <p style={{zIndex: '10'}}>{id + ' (' + percentage + '%)'}</p>
+                <p style={{position:'absolute',padding:'0 10px'}}>{id + ' (' + percentage + '%)'}</p>
             </div>
 
         );
