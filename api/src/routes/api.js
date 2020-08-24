@@ -151,7 +151,7 @@ router.get('/user/layout', async (req, res) => {
         return new Promise((resolve, reject) => {
             findUserLayoutByToken(tkn, "dashboard").then(result => res.json({result: result})).catch(err => res.json({error: err}));
         })
-    })
+    }).catch(console.log)
 })
 
 //Get Business Orders By Department

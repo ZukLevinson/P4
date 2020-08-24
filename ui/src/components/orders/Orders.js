@@ -554,14 +554,6 @@ class Orders extends React.Component {
 
                     <div style={{flex:'1', height:'100%'}}>
                         <table className="orders" style={tblStyle}>
-                            {/*<thead>*/}
-                            {/*<tr>*/}
-                            {/*    <th>Order ID</th>*/}
-                            {/*    <th>Products</th>*/}
-                            {/*    <th>Order Status</th>*/}
-                            {/*    <th>Expected</th>*/}
-                            {/*</tr>*/}
-                            {/*</thead>*/}
                             <tbody style={{display:'block',overflowY:"scroll",height:'inherit',width:'inherit'}}>
                             {this.state.data.map((order) => (
                                 <Order data={order} key={Math.random().toString(36).substr(2, 9)}/>
