@@ -21,7 +21,7 @@ class Dot extends React.Component {
                 width: '6px',
                 height: '6px',
                 borderRadius: '3px',
-                background: '#2E2E2E',
+                background: '#2e2e2e',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 transition: '0.1s ease-in-out'
@@ -34,7 +34,7 @@ class Dot extends React.Component {
                     width: '9px',
                     height: '9px',
                     borderRadius: '4px',
-                    background: '#2E2E2E',
+                    background: '#2e2e2e',
                     marginLeft: 'auto',
                     marginRight: 'auto',
                     transition: '0.1s ease-in-out'

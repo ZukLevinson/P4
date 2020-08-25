@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Order from "./Order";
 import HorizontalLine from "../dashboard/HorizontalLine";
+import OrderView from "./OrderView";
 
 import './style.css';
 
@@ -17,9 +18,9 @@ class Orders extends React.Component {
 
     componentDidMount() {
         axios.post('http://localhost:8080/api/user/orders').then(result => {
-                this.setState({data: result.data.result})
+                this.setState({data: result.data.result,timestamp: new Date()})
             }
-        ).catch(err => console.log(err))
+        ).catch(err => console.log(err));
     }
 
     render() {
@@ -39,7 +40,7 @@ class Orders extends React.Component {
                                 width: 'inherit'
                             }}>
                             {this.state.data.map((order) => (
-                                <Order data={order} key={order.order_id}/>
+                                <Order data={order} key={order.order_id} func={this.togglePop}/>
                             ))}
                             </tbody>
                         </table>
@@ -49,7 +50,6 @@ class Orders extends React.Component {
                             Data updated at {this.state.timestamp.toLocaleTimeString()}
                         </p>
                     </div>
-
                 </div>
             </div>
         );

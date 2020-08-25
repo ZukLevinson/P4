@@ -20,11 +20,12 @@ table{
     border-top: 0;
 }
 
-.orders tr:nth-child(even) {
+.orders tbody:nth-child(even) {
     background: rgba(204, 204, 204, 0.2);
     border-top:1px solid rgba(46, 46, 46, 0.42);
     border-bottom:1px solid rgba(46, 46, 46, 0.42);
 }
+
 .orders tr:last-child{
     border-bottom: 0;
 }
