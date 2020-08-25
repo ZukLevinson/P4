@@ -7,6 +7,7 @@ let ObjectId = require('mongoose').Types.ObjectId;
 const User = require('../models/User');
 const Business = require('../models/Business');
 const Layout = require('../models/Layout');
+const Order = require('../models/Order')
 
 //Validate User's cookie
 module.exports.isUserExistsByToken = async function (req) {
@@ -154,8 +155,22 @@ router.get('/user/layout', async (req, res) => {
     }).catch(console.log)
 })
 
-//Get Business Orders By Department
-
+//Get Business Orders By BusinessID
+router.post('/user/orders', async (req, res) => {
+    return authBusinessCookie(req).then(tkn => {
+            Order.find(
+                {
+                    business_id:tkn.business_id
+                }
+            ).then(orders=>{
+                if(orders.length > 0){
+                    res.json({result: orders}).end()
+                } else {
+                    res.json({result: 'No Orders Found'})
+                }
+            })
+    }).catch(console.log)
+})
 
 
 //Find User's Layout according to decoded token and title of layout component

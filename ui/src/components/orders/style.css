@@ -1,5 +1,10 @@
 .orders table td {
-    border: 1px solid #2E2E2E;
+    border: 1px solid rgba(46, 46, 46, 0.42);
+    padding:0;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 .orders table tr td:first-child {
@@ -10,33 +15,47 @@
     border-right: 0;
 }
 
-.orders table th {
-    border: 1px solid #2E2E2E;
-}
-
-.orders table tr th:first-child {
-    border-left: 0;
-}
-
-.orders table tr th:last-child {
-    border-right: 0;
-}
-
-.orders table th {
-    border-bottom: 0;
-    border-top:0;
-}
-
 .orders table td {
     border-bottom: 0;
-    border-top:0;
+    border-top: 0;
 }
 
-.orders tr:nth-child(even) {background: rgba(204, 204, 204, 0.2)
+.orders tr:nth-child(even) {
+    background: rgba(204, 204, 204, 0.2);
+    border-top:1px solid rgba(46, 46, 46, 0.42);
+    border-bottom:1px solid rgba(46, 46, 46, 0.42);
+}
+.orders tr:last-child{
+    border-bottom: 0;
 }
 
-.orders td{
-    width:1%;
-    white-space:nowrap;
-    height:20px;
+.orders td {
+    width: 1%;
+    white-space: nowrap;
+    height: 20px;
+    padding:0;
+}
+
+.orders tr td:nth-child(1) {
+    width: 5%;
+    text-align: center;
+    border-right: 1px solid rgba(46, 46, 46, 0.42);
+}
+
+.orders tr td:nth-child(2) {
+    width: 20%;
+    border-right: 1px solid rgba(46, 46, 46, 0.42);
+}
+
+.orders tr td:nth-child(3) {
+    width: 10%;
+    border-right: 1px solid rgba(46, 46, 46, 0.42);
+}
+
+.orders tr td:nth-child(4) {
+    width: 10%;
+}
+
+.orders tr {
+    width: 100%;
 }
