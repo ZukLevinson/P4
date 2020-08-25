@@ -9,7 +9,7 @@ class Order extends React.Component {
         super(props);
 
         this.state = {
-            seen: false,
+            seen: true,
             hover: false
         }
     }
@@ -35,9 +35,8 @@ class Order extends React.Component {
         const {order_id, products, status} = this.props.data;
 
         return (
-            <tbody onClick={this.togglePop} onMouseLeave={this.hoverHandler} onMouseEnter={this.hoverHandler}
-                   style={this.getStyle()}>
-            <tr>
+            <tbody style={this.getStyle()}>
+            <tr onClick={this.togglePop} onMouseLeave={this.hoverHandler} onMouseEnter={this.hoverHandler}>
                 <td id="name" style={{padding: '0 10px'}}>
                     {order_id}
                 </td>
@@ -45,7 +44,7 @@ class Order extends React.Component {
                     {JSON.stringify(products)}
                 </td>
                 <td id="status">
-                    <Progress data={status}/>
+                    <Progress data={status} percentage={true}/>
                 </td>
                 <td id="expected" style={{padding: '0 10px'}}>
                     expected

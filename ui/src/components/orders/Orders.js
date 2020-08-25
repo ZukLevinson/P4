@@ -17,7 +17,7 @@ class Orders extends React.Component {
     }
 
     componentDidMount() {
-        axios.post('http://localhost:8080/api/user/orders').then(result => {
+        axios.get('http://localhost:8080/api/user/orders').then(result => {
                 this.setState({data: result.data.result,timestamp: new Date()})
             }
         ).catch(err => console.log(err));

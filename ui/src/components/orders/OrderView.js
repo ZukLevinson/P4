@@ -1,29 +1,42 @@
 import React from 'react';
 
-import Type from "./Info/Type";
+import Client from "./Info/Client";
+import Orders from "./Info/Orders";
+import axios from "axios";
 
 class OrderView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.data
+            data: this.props.data,
+            orders: ''
         }
+
+        axios.get('http://localhost:8080/api/user/client', {
+            params: {
+                client_id: this.props.id
+            }
+        }).then(user => {
+            this.setState({orders: user.data.result[0]})
+        })
     }
 
     render() {
+        const {client_id} = this.state.data.source;
         return (
             <tr style={orderStyle} height="200px">
-                <td>
-                    <Type data={this.state.data}/>
+                <td style={tdStyle}>
+                    <Client id={client_id} orders={this.state.orders}/>
+                    <Orders id={client_id} orders={this.state.orders}/>
                 </td>
-                <td>
-                    <Type data={this.state.data.products}/>
+                <td style={tdStyle}>
+                    {/*<Type data={this.state.data}/>*/}
                 </td>
-                <td>
-                    <Type data={this.state.data.status}/>
+                <td style={tdStyle}>
+                    {/*<Type data={this.state.data}/>*/}
                 </td>
-                <td>
-                    <Type data={this.state.data}/>
+                <td style={tdStyle}>
+                    {/*<Type data={this.state.data}/>*/}
                 </td>
             </tr>
         )
@@ -35,8 +48,7 @@ const orderStyle = {
     borderTop: '0',
 }
 
-const containerStyle = {
-    width: '100%',
-    height: '200px'
+const tdStyle = {
+    padding:'10px'
 }
 export default OrderView;

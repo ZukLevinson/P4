@@ -8,6 +8,7 @@ const User = require('../models/User');
 const Business = require('../models/Business');
 const Layout = require('../models/Layout');
 const Order = require('../models/Order')
+const Client = require('../models/Client');
 
 //Validate User's cookie
 module.exports.isUserExistsByToken = async function (req) {
@@ -156,19 +157,50 @@ router.get('/user/layout', async (req, res) => {
 })
 
 //Get Business Orders By BusinessID
-router.post('/user/orders', async (req, res) => {
+router.get('/user/orders', async (req, res) => {
     return authBusinessCookie(req).then(tkn => {
-            Order.find(
-                {
-                    business_id:tkn.business_id
-                }
-            ).then(orders=>{
-                if(orders.length > 0){
-                    res.json({result: orders}).end()
-                } else {
-                    res.json({result: 'No Orders Found'})
-                }
-            })
+        Order.find(
+            {
+                business_id: tkn.business_id
+            }
+        ).then(orders => {
+            if (orders.length > 0) {
+                res.json({result: orders}).end()
+            } else {
+                res.json({result: 'No Orders Found'})
+            }
+        })
+    }).catch(console.log)
+})
+
+//Get Client Orders By ClientID
+router.get('/user/client/orders', async (req, res) => {
+    return authBusinessCookie(req).then(tkn => {
+        Order.find(
+            {
+                "source.client_id": req.query.client_id
+            }
+        ).then(orders => {
+            if (orders.length > 0) {
+                res.json({result: orders}).end()
+            } else {
+                res.json({result: 'No Orders Found'})
+            }
+        })
+    }).catch(console.log)
+})
+
+router.get('/user/client', async (req, res) => {
+    return authBusinessCookie(req).then(tkn => {
+        Client.find(
+            {client_id: req.query.client_id, business_id: tkn.business_id}
+        ).then(client => {
+            if (client.length > 0) {
+                res.json({result: client}).end()
+            } else {
+                res.json({result: 'No Users Found'}).end()
+            }
+        })
     }).catch(console.log)
 })
 

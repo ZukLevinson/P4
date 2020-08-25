@@ -5,7 +5,8 @@ class Progress extends React.Component {
         super(props);
         this.state={
             status_kinds: ['Ordered', 'Handled', 'Waiting for Manufacturing', 'Manufactured', 'Waiting for Packaging', 'Packaging', 'Waiting for Shipping', 'Shipped', 'Arrived', 'Other'],
-            percentageYes: ['3', '5']
+            percentageYes: ['3', '5'],
+            size:this.props.size
         }
     }
 
@@ -21,12 +22,26 @@ class Progress extends React.Component {
         if (status === '8') return 'rgba(232,82,44,0.56)'
         if (status === '9') return 'rgba(232,82,44,0.56)'
     }
+    getStyle = () => {
+        if(this.state.size === "auto"){
+            return(
+                {
+                    position:'absolute',fontSize:'70%'
+                }
+            )
+        } else {
+            return(
+                {
+                    position:'absolute'
+                }
+            )
+        }
+    }
 
     render() {
         const {id, percentage} = this.props.data;
-        const percentageStatus = this.state.percentageYes.includes(id) ? ' (' + percentage + '%)' : '';
+        const percentageStatus = this.state.percentageYes.includes(id) && this.props.percentage ? ' (' + percentage + '%)' : '';
         const progressStyle = {
-            height: 'inherit',
             width: percentage + '%',
             background: this.getColor(id),
             textTransform: 'capitalize',
@@ -36,7 +51,7 @@ class Progress extends React.Component {
         return (
             <div style={{position:'relative', height:"100%"}}>
                 <div style={progressStyle}>&nbsp;</div>
-                <p style={{position:'absolute',padding:'0 10px'}}>{this.state.status_kinds[id] + percentageStatus}</p>
+                <p style={this.getStyle()}>{this.state.status_kinds[id] + percentageStatus}</p>
             </div>
 
         );
