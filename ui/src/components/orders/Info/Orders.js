@@ -8,13 +8,38 @@ class Orders extends React.Component {
         super(props);
 
         this.state = {
-            orders: this.props.orders !== undefined ? this.props.orders : new Array(1)
+            isLoaded: false,
+            data: null
         }
+
+    }
+    componentDidMount() {
+        axios.get('http://localhost:8080/api/user/client', {
+            params: {
+                client_id: this.props.id
+            }
+        }).then(
+            res => this.setState({
+                ...this.state,
+                isLoaded: true,
+                data: res.data.result[0]
+            })
+        );
+    }
+    getOrders = (client_id) =>{
+        axios.get('http://localhost:8080/api/user/client', {
+            params: {
+                client_id: this.props.id
+            }
+        }).then(user => {
+            this.setState({user: user.data.result[0]})
+        })
     }
 
     render() {
-        const orders = this.state.orders !== undefined ? this.state.orders : new Array(1)
 
+
+        const orders = this.state.user.orders !== undefined ? this.state.user.orders : new Array(1)
         return (
             <div style={containerStyle}>
                 {orders.slice(0, 3).map(order=>(
