@@ -158,33 +158,52 @@ router.get('/user/layout', async (req, res) => {
 
 //Get Business Orders By BusinessID
 router.get('/user/orders', async (req, res) => {
+    console.log('')
+
+    return authBusinessCookie(req).then(tkn => {
+        console.log(req.query.id)
+        if (req.query.id === '') {
+            Order.find(
+                {
+                    business_id: tkn.business_id
+                }
+            ).then(orders => {
+                if (orders.length > 0) {
+                    res.json({result: orders}).end()
+                } else {
+                    res.json({result: false})
+                }
+            })
+        } else {
+            Order.find(
+                {
+                    business_id: tkn.business_id,
+                    order_id: {$regex : ".*"+req.query.id+".*"}
+                }
+            ).then(orders => {
+                if (orders.length > 0) {
+                    res.json({result: orders}).end()
+                } else {
+                    res.json({result: false}).end()
+                }
+            })
+        }
+    }).catch(console.log)
+})
+
+//Get Client Orders By ClientID and BusinessID
+router.get('/user/client/orders', async (req, res) => {
     return authBusinessCookie(req).then(tkn => {
         Order.find(
             {
+                "source.client_id": req.query.client_id,
                 business_id: tkn.business_id
             }
         ).then(orders => {
             if (orders.length > 0) {
                 res.json({result: orders}).end()
             } else {
-                res.json({result: 'No Orders Found'})
-            }
-        })
-    }).catch(console.log)
-})
-
-//Get Client Orders By ClientID
-router.get('/user/client/orders', async (req, res) => {
-    return authBusinessCookie(req).then(tkn => {
-        Order.find(
-            {
-                "source.client_id": req.query.client_id
-            }
-        ).then(orders => {
-            if (orders.length > 0) {
-                res.json({result: orders}).end()
-            } else {
-                res.json({result: 'No Orders Found'})
+                res.json({result: false}).end()
             }
         })
     }).catch(console.log)

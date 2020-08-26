@@ -9,12 +9,12 @@ class Orders extends React.Component {
 
         this.state = {
             isLoaded: false,
-            data: null
+            orders: null
         }
 
     }
     componentDidMount() {
-        axios.get('http://localhost:8080/api/user/client', {
+        axios.get('http://localhost:8080/api/user/client/orders', {
             params: {
                 client_id: this.props.id
             }
@@ -22,35 +22,34 @@ class Orders extends React.Component {
             res => this.setState({
                 ...this.state,
                 isLoaded: true,
-                data: res.data.result[0]
+                orders: res.data.result
             })
         );
     }
-    getOrders = (client_id) =>{
-        axios.get('http://localhost:8080/api/user/client', {
-            params: {
-                client_id: this.props.id
-            }
-        }).then(user => {
-            this.setState({user: user.data.result[0]})
-        })
-    }
 
     render() {
-
-
-        const orders = this.state.user.orders !== undefined ? this.state.user.orders : new Array(1)
-        return (
-            <div style={containerStyle}>
-                {orders.slice(0, 3).map(order=>(
-                    <div style={{display:'flex', flexDirection:'column', border:'1px gray solid', padding:'5px', textAlign:'center'}}>
-                        <p>{order}</p>
-                        <p>28/08/2020</p>
-                        <Progress size="auto" data={{id: '3',percentage:'89'}}/>
-                    </div>
-                ))}
-            </div>
-        );
+        const {isLoaded, orders} = this.state;
+        if (isLoaded) {
+            return (
+                <div style={containerStyle}>
+                    {orders.slice(0,3).map(order => (
+                        <div key={order.order_id} style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: '1px gray solid',
+                            padding: '5px',
+                            textAlign: 'center',
+                            wordWrap: 'break-word',
+                            minWidth:'20%'
+                        }}>
+                            <p>{order.order_id}</p>
+                            <p>{new Date(order.date).toLocaleDateString()}</p>
+                            <Progress size="auto" data={order.status}/>
+                        </div>
+                    ))}
+                </div>
+            );
+        } else return <a>Loading</a>;
     }
 }
 
@@ -60,7 +59,7 @@ const containerStyle = {
     textAlign: 'left',
     width:'100%',
     display:'flex',
-    justifyContent:'space-between'
+    justifyContent:'space-around'
 }
 
 export default Orders;

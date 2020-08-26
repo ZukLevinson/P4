@@ -36,8 +36,7 @@ class Client extends React.Component {
                     <p>Tel: {phone} | BN: {bn}</p>
                 </div>
             );
-        } else return <a>Loading</a>
-
+        } else return <a>Loading</a>;
     }
 }
 

@@ -3,10 +3,10 @@ import React from 'react';
 class Progress extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             status_kinds: ['Ordered', 'Handled', 'Waiting for Manufacturing', 'Manufactured', 'Waiting for Packaging', 'Packaging', 'Waiting for Shipping', 'Shipped', 'Arrived', 'Other'],
             percentageYes: ['3', '5'],
-            size:this.props.size
+            size: this.props.size
         }
     }
 
@@ -23,16 +23,16 @@ class Progress extends React.Component {
         if (status === '9') return 'rgba(232,82,44,0.56)'
     }
     getStyle = () => {
-        if(this.state.size === "auto"){
-            return(
+        if (this.state.size === "auto") {
+            return (
                 {
-                    position:'absolute',fontSize:'70%'
-                }
+                    position: 'absolute', fontSize: '50%',width:'100%', height:'inherit'
+        }
             )
         } else {
-            return(
+            return (
                 {
-                    position:'absolute'
+                    position: 'absolute'
                 }
             )
         }
@@ -49,7 +49,7 @@ class Progress extends React.Component {
         }
 
         return (
-            <div style={{position:'relative', height:"100%"}}>
+            <div style={{position: 'relative', height: "100%", wordWrap: 'break-word',overflow:'hidden'}}>
                 <div style={progressStyle}>&nbsp;</div>
                 <p style={this.getStyle()}>{this.state.status_kinds[id] + percentageStatus}</p>
             </div>

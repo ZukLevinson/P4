@@ -9,7 +9,7 @@ class Order extends React.Component {
         super(props);
 
         this.state = {
-            seen: true,
+            seen: false,
             hover: false
         }
     }
@@ -25,7 +25,8 @@ class Order extends React.Component {
             return (
                 {
                     background: 'rgba(0,0,0,0.1)',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    width:'inherit'
                 }
             )
         }

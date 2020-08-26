@@ -8,38 +8,50 @@ class OrderView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.data,
+            isLoaded: false,
+            data: null,
             orders: ''
         }
 
+    }
+
+    componentDidMount() {
         axios.get('http://localhost:8080/api/user/client', {
             params: {
                 client_id: this.props.id
             }
-        }).then(user => {
-            this.setState({orders: user.data.result[0]})
-        })
+        }).then(res => this.setState({
+            ...this.state,
+            isLoaded: true,
+            data: res.data.result[0]
+        }))
     }
 
     render() {
-        const {client_id} = this.state.data.source;
-        return (
-            <tr style={orderStyle} height="200px">
-                <td style={tdStyle}>
-                    <Client id={client_id} orders={this.state.orders}/>
-                    <Orders id={client_id} orders={this.state.orders}/>
-                </td>
-                <td style={tdStyle}>
-                    {/*<Type data={this.state.data}/>*/}
-                </td>
-                <td style={tdStyle}>
-                    {/*<Type data={this.state.data}/>*/}
-                </td>
-                <td style={tdStyle}>
-                    {/*<Type data={this.state.data}/>*/}
-                </td>
-            </tr>
-        )
+        const {isLoaded, data} = this.state;
+
+        if(isLoaded) {
+            const {client_id} = this.props.data.source;
+            return (
+                <tr style={orderStyle} height="200px">
+                    <td style={tdStyle}>
+                        <Client id={client_id} orders={data}/>
+                        <Orders id={client_id} orders={data}/>
+                    </td>
+                    <td style={tdStyle}>
+                        {/*<Type data={this.state.data}/>*/}
+                    </td>
+                    <td style={tdStyle}>
+                        {/*<Type data={this.state.data}/>*/}
+                    </td>
+                    <td style={tdStyle}>
+                        {/*<Type data={this.state.data}/>*/}
+                    </td>
+                </tr>
+            )
+        } else {
+            return <a>Loading</a>;
+        }
     }
 }
 
@@ -49,6 +61,6 @@ const orderStyle = {
 }
 
 const tdStyle = {
-    padding:'10px'
+    padding: '10px'
 }
 export default OrderView;
