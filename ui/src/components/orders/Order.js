@@ -42,7 +42,9 @@ class Order extends React.Component {
                     {order_id}
                 </td>
                 <td id="products" style={{padding: '0 10px'}}>
-                    {JSON.stringify(products)}
+                    {products.map(product=>(
+                        <span style={{textOverflow:'ellipsis'}}>{product.id + '*' + product.quantity+'|'}</span>
+                    ))}
                 </td>
                 <td id="status">
                     <Progress data={status} percentage={true}/>

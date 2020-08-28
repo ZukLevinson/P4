@@ -33,7 +33,7 @@ class OrderView extends React.Component {
 
         if(isLoaded) {
             const {client_id} = this.props.data.source;
-            console.log(this.state.orders)
+
             return (
                 <tr style={orderStyle} height="200px">
                     <td style={tdStyle} id="client_info">
@@ -52,7 +52,7 @@ class OrderView extends React.Component {
                 </tr>
             )
         } else {
-            return <p>Loading</p>;
+            return <tr><td colSpan={4}><p>Loading...</p></td></tr>;
         }
     }
 }

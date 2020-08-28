@@ -21,14 +21,15 @@ class OrderInfo extends React.Component {
 
     render() {
         let x = this.state.x
+
         return (
             <div style={containerStyle}>
-                {this.state.products.slice(x, x + 5).map(products => (
-                    <Product data={products} title={x}/>
+                {this.state.products.slice(x, x + 5).map(product => (
+                    <Product key={product.id} data={product}/>
                 ))}
-                <div id="nextButton" style={btnStyle} onClick={this.upHandler}>
+                {this.state.products.length > 5 ? <div id="nextButton" style={btnStyle} onClick={this.upHandler}>
                     <p>Next...</p>
-                </div>
+                </div> : null}
             </div>
         );
     }
@@ -39,23 +40,22 @@ const containerStyle = {
     height: '100%',
     textAlign: 'left',
     overflow: 'hidden',
-    // maxWidth:'300px',
     width: '100%',
     justifyContent: 'space-around',
     display: 'flex',
     flexWrap: 'wrap',
-    flexBasis: '33.333333%'
+    flexBasis: '33.333333%',
 }
-const btnStyle={
+const btnStyle = {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius:'10px',
+    borderRadius: '10px',
     padding: '5px',
     boxShadow: '0 0 10px rgba(46, 46, 46, 0.20)',
     textAlign: 'center',
     wordWrap: 'break-word',
-    minWidth:'20%',
-    margin:'10px'
+    minWidth: '20%',
+    margin: '10px'
 }
 
 export default OrderInfo;

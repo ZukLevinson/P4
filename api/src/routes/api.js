@@ -9,6 +9,7 @@ const Business = require('../models/Business');
 const Layout = require('../models/Layout');
 const Order = require('../models/Order')
 const Client = require('../models/Client');
+const Product = require('../models/Products')
 
 //Validate User's cookie
 module.exports.isUserExistsByToken = async function (req) {
@@ -178,7 +179,7 @@ router.get('/user/orders', async (req, res) => {
             Order.find(
                 {
                     business_id: tkn.business_id,
-                    order_id: {$regex : ".*"+req.query.id+".*"}
+                    order_id: {$regex: ".*" + req.query.id + ".*"}
                 }
             ).then(orders => {
                 if (orders.length > 0) {
@@ -209,6 +210,26 @@ router.get('/user/client/orders', async (req, res) => {
     }).catch(console.log)
 })
 
+//Get Product Info By ProductID and BusinessID
+router.get('/user/products', async (req, res) => {
+    return authBusinessCookie(req).then(tkn => {
+        console.log('ID: ', req.query.id)
+        Product.findOne(
+            {
+                product_id: req.query.id,
+                business_id: tkn.business_id
+            }
+        ).then(product => {
+            if (product === null) {
+                res.json({result: false}).end()
+            } else {
+                res.json({result: product}).end()
+            }
+        })
+    }).catch(console.log)
+})
+
+//Find Client Info according to decoded token and clientID
 router.get('/user/client', async (req, res) => {
     return authBusinessCookie(req).then(tkn => {
         Client.find(
