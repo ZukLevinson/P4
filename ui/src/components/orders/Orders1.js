@@ -36,11 +36,7 @@ class Orders extends React.Component {
                 id: value
             }
         }).then(result => {
-                this.setState({
-                    data: result.data.result,
-                    timestamp: new Date(),
-                    redirect: <Redirect to={`/orders?id=${value}`}/>
-                })
+                this.setState({data: result.data.result, timestamp: new Date(), redirect:<Redirect to={`/orders?id=${value}`}/>})
             }
         ).catch(err => console.log(err));
     }
@@ -60,21 +56,17 @@ class Orders extends React.Component {
                         </div>
                         <HorizontalLine/>
                     </div>
-                    <div style={{
-                        maxHeight: '100%',
-                        overflowY: 'scroll',
-                        display: 'flex',
-                        alignItems: 'stretch',
-                        flexDirection: 'column'
-                    }}>
+                    <div style={{flex: '1', height: '100%', overflow: 'hidden'}}>
                         <table className="orders" style={tblStyle}>
                             <tbody style={{
                                 display: 'block',
-                                width: '100%'
+                                overflowY: "scroll",
+                                height: 'inherit',
+                                width: 'inherit'
                             }}>
-                            {this.state.data !== false ? this.state.data.map((order) => (
+                            {this.state.data!==false?this.state.data.map((order) => (
                                 <Order data={order} key={order.order_id} func={this.togglePop}/>
-                            )) : null}
+                            )):null}
                             </tbody>
                         </table>
                     </div>
@@ -100,19 +92,16 @@ const ordersStyle = {
 
 const containerStyle = {
     margin: '20px',
-    flex: '1 0',
+    flex: '1 1',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
 }
 const tblStyle = {
     borderCollapse: 'collapse',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+    height: 'inherit',
+    width: '100%'
 }
-const headStyle = {
-    position: 'absolute',
-}
+
 const titleStyle = {
     fontSize: '40px',
     fontWeight: '200',
@@ -122,8 +111,7 @@ const footStyle = {
     color: 'gray',
     fontSize: '13px',
     marginTop: '20px',
-    height: '20px',
-    // flex: '0 1',
+    height: '20px'
 }
 const inputStyle = {
     width: '200px',

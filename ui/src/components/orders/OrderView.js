@@ -37,11 +37,11 @@ class OrderView extends React.Component {
             return (
                 <tr style={orderStyle} height="200px">
                     <td style={tdStyle} id="client_info">
-                        <Client id={client_id}/>
-                        <Orders id={client_id}/>
+                        {/*<Client id={client_id}/>*/}
+                        {/*<Orders id={client_id}/>*/}
                     </td>
                     <td style={tdStyle} id="order_info">
-                        <OrderInfo products={this.props.data.products}/>
+                        {/*<OrderInfo products={this.props.data.products}/>*/}
                     </td>
                     <td style={tdStyle}>
                         {/*<Type data={this.state.data}/>*/}

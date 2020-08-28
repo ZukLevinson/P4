@@ -28,7 +28,6 @@ class Product extends React.Component {
 
     render() {
         const product = this.state.data
-        console.log(this.state.products_info)
         return (
             <div style={containerStyle}>
                 <p id="title">{product.id}</p>

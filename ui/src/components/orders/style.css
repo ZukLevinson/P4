@@ -1,28 +1,4 @@
-.orders table td {
-    border: 1px solid rgba(46, 46, 46, 0.42);
-    padding:0;
-}
-table{
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: fixed !important;
-}
-
-.orders table tr td:first-child {
-    border-left: 0;
-}
-
-.orders table tr td:last-child {
-    border-right: 0;
-}
-
-.orders table td {
-    border-bottom: 0;
-    border-top: 0;
-    width:25%;
-}
-
-.orders tbody:nth-child(even) {
+.orders tr:nth-child(even) {
     background: rgba(204, 204, 204, 0.2);
     border-top:1px solid rgba(46, 46, 46, 0.42);
     border-bottom:1px solid rgba(46, 46, 46, 0.42);
@@ -32,28 +8,28 @@ table{
     border-bottom: 0;
 }
 
-.orders td {
-    width: 25%;
-    overflow: hidden;
-    max-width: 350px;
-    white-space: nowrap;
-    height: 20px;
-    padding:0;
-}
-
 .orders tr td:nth-child(1) {
     text-align: center;
     border-right: 1px solid rgba(46, 46, 46, 0.42);
+    flex-grow: 1;
 }
 
 .orders tr td:nth-child(2) {
     border-right: 1px solid rgba(46, 46, 46, 0.42);
+    flex-grow: 3;
 }
 
 .orders tr td:nth-child(3) {
     border-right: 1px solid rgba(46, 46, 46, 0.42);
+    flex-grow: 2;
 }
-
-.orders tr {
-    width: 100%;
+.orders tr td:nth-child(4) {
+    flex-grow: 1;
+}
+.orders tr{
+    display:flex;
+}
+.orders td{
+    flex: 1 0 0;
+    padding: 0;
 }
