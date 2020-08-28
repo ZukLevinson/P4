@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import * as qs from 'query-string';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 
 import Order from "./Order";
 import HorizontalLine from "../dashboard/HorizontalLine";

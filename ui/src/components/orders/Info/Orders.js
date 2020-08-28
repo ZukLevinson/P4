@@ -36,8 +36,9 @@ class Orders extends React.Component {
                         <div key={order.order_id} style={{
                             display: 'flex',
                             flexDirection: 'column',
-                            border: '1px gray solid',
+                            borderRadius:'10px',
                             padding: '5px',
+                            boxShadow: '0 0 10px rgba(46, 46, 46, 0.20)',
                             textAlign: 'center',
                             wordWrap: 'break-word',
                             minWidth:'20%'
@@ -49,7 +50,7 @@ class Orders extends React.Component {
                     ))}
                 </div>
             );
-        } else return <a>Loading</a>;
+        } else return <p>Loading</p>;
     }
 }
 
