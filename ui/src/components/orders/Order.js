@@ -9,7 +9,7 @@ class Order extends React.Component {
         super(props);
 
         this.state = {
-            seen: false,
+            seen: true,
             hover: false
         }
     }
@@ -42,9 +42,14 @@ class Order extends React.Component {
                         {order_id}
                     </td>
                     <td id="products" style={{padding: '0 10px'}}>
-                        {products.map(product => (
-                            <span style={{textOverflow: 'ellipsis'}}>{product.id + '*' + product.quantity + '|'}</span>
-                        ))}
+                        <div style={{flexBasis:'100%',display:'block'}}>
+                            <div style={{textOverflow: 'ellipsis',overflow:'hidden',whiteSpace:'nowrap',maxWidth:'500px'}}>
+                                {products.map(product => (
+                                    <span style={{textOverflow: 'ellipsis'}}>{product.id + '*' + product.quantity + '|'}</span>
+                                ))}
+                            </div>
+                            {/*<span style={{textOverflow: 'ellipsis',overflow:'hidden',whiteSpace:'nowrap'}}></span>*/}
+                        </div>
                     </td>
                     <td id="status">
                         <Progress data={status} percentage={true}/>

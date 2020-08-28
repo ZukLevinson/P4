@@ -225,6 +225,7 @@ router.get('/user/products', async (req, res) => {
             } else {
                 res.json({result: product}).end()
             }
+
         })
     }).catch(console.log)
 })

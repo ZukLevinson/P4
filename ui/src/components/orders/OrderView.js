@@ -4,6 +4,7 @@ import axios from "axios";
 import Client from "./Info/Client";
 import Orders from "./Info/Orders";
 import OrderInfo from "./Info/OrderInfo";
+import Progress from "./Progress";
 
 class OrderView extends React.Component {
     constructor(props) {
@@ -31,20 +32,27 @@ class OrderView extends React.Component {
     render() {
         const {isLoaded, data} = this.state;
 
-        if(isLoaded) {
+        if (isLoaded) {
             const {client_id} = this.props.data.source;
 
             return (
                 <tr style={orderStyle} height="200px">
                     <td style={tdStyle} id="client_info">
-                        {/*<Client id={client_id}/>*/}
-                        {/*<Orders id={client_id}/>*/}
+                        <Client id={client_id}/>
                     </td>
                     <td style={tdStyle} id="order_info">
-                        {/*<OrderInfo products={this.props.data.products}/>*/}
+                        <OrderInfo products={this.props.data.products}/>
                     </td>
-                    <td style={tdStyle}>
-                        {/*<Type data={this.state.data}/>*/}
+                    <td style={{display: 'flex', flexDirection: 'column'}}>
+                        <div style={{height:'30px',margin:"20px 10px 0 10px",display:'flex', verticalAlign:'top',justifyContent:'center'}}>
+                            <div style={{height:'30px',display:'inline-block', verticalAlign:'top', marginRight:'5px', textDecoration:'underline'}}>
+                                Next Stage:
+                            </div>
+                            <div style={{width:'200px',height:'30px',display:'inline-block'}}>
+                                <Progress color={true} data={{id: this.props.data.status.next}}/>
+                            </div>
+                        </div>
+                        <Orders id={client_id}/>
                     </td>
                     <td style={tdStyle}>
                         {/*<Type data={this.state.data}/>*/}
@@ -52,7 +60,9 @@ class OrderView extends React.Component {
                 </tr>
             )
         } else {
-            return <tr><td colSpan={4}><p>Loading...</p></td></tr>;
+            return <tr>
+                <td colSpan={4}><p>Loading...</p></td>
+            </tr>;
         }
     }
 }
@@ -63,6 +73,8 @@ const orderStyle = {
 }
 
 const tdStyle = {
-    padding: '10px'
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'row',
 }
 export default OrderView;

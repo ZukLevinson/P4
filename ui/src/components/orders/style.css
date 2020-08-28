@@ -17,11 +17,13 @@
 .orders tr td:nth-child(2) {
     border-right: 1px solid rgba(46, 46, 46, 0.42);
     flex-grow: 3;
+    display:flex;
 }
 
 .orders tr td:nth-child(3) {
     border-right: 1px solid rgba(46, 46, 46, 0.42);
     flex-grow: 2;
+    padding:0;
 }
 .orders tr td:nth-child(4) {
     flex-grow: 1;
@@ -30,6 +32,7 @@
     display:flex;
 }
 .orders td{
-    flex: 1 0 0;
+    flex: 0;
+    flex-shrink: 0 !important;
     padding: 0;
 }

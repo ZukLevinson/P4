@@ -41,10 +41,11 @@ class Orders extends React.Component {
                             boxShadow: '0 0 10px rgba(46, 46, 46, 0.20)',
                             textAlign: 'center',
                             wordWrap: 'break-word',
-                            minWidth:'20%'
+                            justifyContent:'space-between',
+                            margin:'20px 10px'
                         }}>
                             <p>{order.order_id}</p>
-                            <p>{new Date(order.date).toLocaleDateString()}</p>
+                            <p style={{height:'100%'}}>{new Date(order.date).toLocaleDateString()}</p>
                             <Progress size="auto" data={order.status}/>
                         </div>
                     ))}
@@ -56,9 +57,9 @@ class Orders extends React.Component {
 
 const containerStyle = {
     wordWrap: 'break-word',
-    height: '50%',
+    height: '100%',
     textAlign: 'left',
-    width:'100%',
+    width:'inherit',
     display:'flex',
     justifyContent:'space-around'
 }

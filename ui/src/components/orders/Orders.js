@@ -31,6 +31,7 @@ class Orders extends React.Component {
 
     handleChange = (event) => {
         const value = event.target.value;
+        this.setState({data:[]});
         axios.get('http://localhost:8080/api/user/orders', {
             params: {
                 id: value

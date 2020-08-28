@@ -32,8 +32,8 @@ class Client extends React.Component {
             return (
                 <div style={containerStyle}>
                     <p>Ordered by {full_name} from {business_name}.</p>
-                    <p style={{userSelect: 'all'}}>{address}</p>
-                    <p>Tel: {phone} | BN: {bn}</p>
+                    <p style={{userSelect: 'all',margin:'20px 0'}}>{address}</p>
+                    <p>Tel: <a href={"tel:"+phone} style={{textDecoration:'underline'}}>{phone}</a> | BN: {bn}</p>
                 </div>
             );
         } else return <p>Loading</p>;
@@ -42,7 +42,6 @@ class Client extends React.Component {
 
 const containerStyle = {
     wordWrap: 'break-word',
-    height: '50%',
     textAlign: 'left'
 }
 

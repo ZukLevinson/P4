@@ -6,7 +6,8 @@ class Progress extends React.Component {
         this.state = {
             status_kinds: ['Ordered', 'Handled', 'Waiting for Manufacturing', 'Manufactured', 'Waiting for Packaging', 'Packaging', 'Waiting for Shipping', 'Shipped', 'Arrived', 'Other'],
             percentageYes: ['3', '5'],
-            size: this.props.size
+            size: this.props.size,
+            color: this.props.color === undefined
         }
     }
 
@@ -26,10 +27,17 @@ class Progress extends React.Component {
         if (this.state.size === "auto") {
             return (
                 {
-                    position: 'absolute', fontSize: '50%',width:'100%', height:'inherit'
-        }
+                    position: 'absolute', fontSize: '50%', width: '100%', height: 'inherit',fontWeight:'500',letterSpacing:'1px'
+                }
             )
         } else {
+            if(this.state.color===false){
+                return(
+                    {
+                        color:this.getColor(this.props.data.id),position: 'absolute',fontWeight:'900'
+                    }
+                )
+            }
             return (
                 {
                     position: 'absolute'
@@ -49,8 +57,8 @@ class Progress extends React.Component {
         }
 
         return (
-            <div style={{position: 'relative', height: "100%", wordWrap: 'break-word',overflow:'hidden'}}>
-                <div style={progressStyle}>&nbsp;</div>
+            <div style={{position: 'relative', height: "100%", wordWrap: 'break-word', overflow: 'hidden'}}>
+                {this.state.color ? <div style={progressStyle}>&nbsp;</div> : null}
                 <p style={this.getStyle()}>{this.state.status_kinds[id] + percentageStatus}</p>
             </div>
 

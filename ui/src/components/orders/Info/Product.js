@@ -28,6 +28,7 @@ class Product extends React.Component {
 
     render() {
         const product = this.state.data
+        console.log(this.state.products_info)
         return (
             <div style={containerStyle}>
                 <p id="title">{product.id}</p>
@@ -44,7 +45,7 @@ const containerStyle={
     boxShadow: '0 0 10px rgba(46, 46, 46, 0.20)',
     textAlign: 'center',
     margin:'10px',
-    flexBasis: '20%',
+    flex:'0 0 14%',
     overflow:'hidden'
 }
 
