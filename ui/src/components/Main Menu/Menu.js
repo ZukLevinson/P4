@@ -16,7 +16,7 @@ function Menu() {
 
                     </div>
                     <div style={sideStyle}>
-                        <img src={require('')}
+                        <img src={require('')}/>
                     </div>
                 </div>
             </div>
