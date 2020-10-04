@@ -1,4 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-/api/node_modules
-/ui/node_modules
+*/node_modules
 .env
+/old
