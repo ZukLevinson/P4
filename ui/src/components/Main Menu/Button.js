@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 class Button extends React.Component {
     state = {
@@ -83,7 +84,8 @@ class Button extends React.Component {
                 height: '100%',
                 flex: '1',
                 cursor: 'pointer'
-            }}>
+            }}><Link to={this.props.button.title}>
+
                 <div style={this.containerStyleGen()}
                      onMouseEnter={() => this.handleMouseOver(true)}
                      onMouseLeave={() => this.handleMouseOver(false)}
@@ -121,6 +123,7 @@ class Button extends React.Component {
                         {this.props.button.title}
                     </div>
                 </div>
+            </Link>
             </div>
         );
     }
