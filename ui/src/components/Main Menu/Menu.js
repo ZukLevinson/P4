@@ -3,6 +3,7 @@ import React from 'react';
 import Greeting from "./Greeting";
 import Clock from "./Clock";
 import Button from "./Button";
+import Indicator from "./Indicator";
 
 class Menu extends React.Component {
     state = {
@@ -10,10 +11,10 @@ class Menu extends React.Component {
             id: '4',
             title: 'forever'
         }],
-        clicked: ''
+        clicked: {id: '1', title: 'live'}
     }
-    handleClick = (title) => {
-        if (this.state.clicked !== title) this.setState({clicked: title});
+    handleClick = (clicked) => {
+        if (this.state.clicked !== clicked.title) this.setState({clicked});
     }
 
     render() {
@@ -27,9 +28,10 @@ class Menu extends React.Component {
                         </div>
                         <div style={centerStyle}>
                             {this.state.buttons.map((button) => (
-                                <Button key={button.id} title={button.title} current={this.state.clicked === button.title}
+                                <Button key={button.id} button={button} current={this.state.clicked.title === button.title}
                                         clicked={this.handleClick}/>
                             ))}
+                            <Indicator size={this.state.buttons.length} current={this.state.clicked.id}/>
                         </div>
                         <div style={sideStyle}>
                             <img alt='Company Logo' src={process.env.PUBLIC_URL + '/images/logo-generic.png'}/>
@@ -72,7 +74,8 @@ const centerStyle = {
     borderRight: '1px solid grey',
     padding: '3px',
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    position:'relative'
 }
 
 export default Menu;
