@@ -24,11 +24,13 @@ class Menu extends React.Component {
                     <div style={{margin: '10px', flex: '1', display: 'flex'}}>
                         <div style={sideStyle}>
                             <Clock/>
+                            { }
                             <Greeting/>
                         </div>
                         <div style={centerStyle}>
                             {this.state.buttons.map((button) => (
-                                <Button key={button.id} button={button} current={this.state.clicked.title === button.title}
+                                <Button key={button.id} button={button}
+                                        current={this.state.clicked.title === button.title}
                                         clicked={this.handleClick}/>
                             ))}
                             <Indicator size={this.state.buttons.length} current={this.state.clicked.id}/>
@@ -75,7 +77,7 @@ const centerStyle = {
     padding: '3px',
     display: 'flex',
     justifyContent: 'space-around',
-    position:'relative'
+    position: 'relative'
 }
 
 export default Menu;

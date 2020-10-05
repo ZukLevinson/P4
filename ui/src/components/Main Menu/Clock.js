@@ -1,9 +1,10 @@
 import React from "react";
+import moment from "moment";
 
 class Clock extends React.Component {
     constructor() {
         super()
-        this.state = {time: new Date()}
+        this.state = {time: moment().utcOffset('+05:30').format('YYYY/MM/DD, HH:mm:ss')}
     }
 
     componentDidMount() {
@@ -12,17 +13,16 @@ class Clock extends React.Component {
 
     currentTime() {
         this.setState({
-            time: new Date()
+            time: moment().utcOffset('+05:30').format('YYYY/MM/DD, HH:mm:ss')
         })
     }
-
     componentWillUnmount() {
         clearInterval(localStorage.getItem('interId'))
     }
 
     render() {
         return (
-            <div>{this.state.time.toLocaleTimeString()}</div>
+            <div>{this.state.time}</div>
         )
     }
 }

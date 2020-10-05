@@ -25,7 +25,7 @@ class Indicator extends React.Component {
             <div style={{width: 'calc(100% - 6px)', bottom: '0', position: 'absolute'}}>
                 <div style={{
                     width: `calc(100%/${this.props.size})`,
-                    marginLeft: `calc(25%*${this.state.current - 1})`,transition:'0.5s'
+                    marginLeft: `calc(25%*${this.state.current - 1})`, transition: '0.5s'
                 }}>
                     <div style={{
                         width: '10%',
