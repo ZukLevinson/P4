@@ -1,7 +1,8 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
 import Menu from "./components/Main Menu/Menu";
+import LiveView from "./components/Live/LiveView";
 
 import './App.css';
 
@@ -9,11 +10,12 @@ function App() {
     return (
         <div style={mainStyle}>
             <Router>
-                <Menu/>
+                <Menu location={window.location.pathname}/>
 
                 <Switch>
+                    <Redirect exact from="/" to="/live"/>
                     <Route path={'/live'}>
-                        1
+                        <LiveView/>
                     </Route>
                     <Route path={'/love'}>
                         2

@@ -11,10 +11,19 @@ class Menu extends React.Component {
             id: '4',
             title: 'forever'
         }],
-        clicked: {id: '1', title: 'live'}
+        clicked: {id: '1', title: 'live'},
+        location: this.props.location
     }
     handleClick = (clicked) => {
         if (this.state.clicked !== clicked.title) this.setState({clicked});
+    }
+
+    componentDidMount() {
+        this.state.buttons.map(button => {
+            if (('/' + button.title) === this.state.location) {
+                this.setState({clicked: {id: button.id, title: button.title}})
+            }
+        })
     }
 
     render() {
@@ -24,7 +33,7 @@ class Menu extends React.Component {
                     <div style={{margin: '10px', flex: '1', display: 'flex'}}>
                         <div style={sideStyle}>
                             <Clock/>
-                            { }
+                            {}
                             <Greeting/>
                         </div>
                         <div style={centerStyle}>
