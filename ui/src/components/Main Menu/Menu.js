@@ -7,7 +7,7 @@ import Indicator from "./Indicator";
 
 class Menu extends React.Component {
     state = {
-        buttons: [{id: '1', title: 'live'}, {id: '2', title: 'love'}, {id: '3', title: 'unite'}, {
+        buttons: [{id: '1', title: 'live'}, {id: '2', title: 'stats'}, {id: '3', title: 'unite'}, {
             id: '4',
             title: 'forever'
         }],
@@ -33,7 +33,6 @@ class Menu extends React.Component {
                     <div style={{margin: '10px', flex: '1', display: 'flex'}}>
                         <div style={sideStyle}>
                             <Clock/>
-                            {}
                             <Greeting/>
                         </div>
                         <div style={centerStyle}>
@@ -60,7 +59,7 @@ const containerStyle = {
     position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
-    zIndex:'1000'
+    zIndex: '1000'
 }
 
 const menuStyle = {

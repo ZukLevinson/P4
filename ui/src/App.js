@@ -17,7 +17,7 @@ function App() {
                     <Route path={'/live'}>
                         <LiveView/>
                     </Route>
-                    <Route path={'/love'}>
+                    <Route path={'/stats'}>
                         2
                     </Route>
                     <Route path={'/unite'}>

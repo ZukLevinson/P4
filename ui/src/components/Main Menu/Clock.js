@@ -4,7 +4,7 @@ import moment from "moment";
 class Clock extends React.Component {
     constructor() {
         super()
-        this.state = {time: moment().utcOffset('+05:30').format('YYYY/MM/DD, HH:mm:ss')}
+        this.state = {time: moment().utcOffset('+03:00').format('YYYY/MM/DD, HH:mm:ss')}
     }
 
     componentDidMount() {
@@ -13,7 +13,7 @@ class Clock extends React.Component {
 
     currentTime() {
         this.setState({
-            time: moment().utcOffset('+05:30').format('YYYY/MM/DD, HH:mm:ss')
+            time: moment().utcOffset('+03:00').format('YYYY/MM/DD, HH:mm:ss')
         })
     }
     componentWillUnmount() {

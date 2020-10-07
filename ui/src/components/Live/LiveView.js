@@ -8,10 +8,10 @@ class LiveView extends React.Component {
         this.state = {
             x: 0,
             y: 0
-        }
-
+        };
         this.selector = React.createRef();
-        this.selector1 = React.createRef()
+
+        this.bubblesArray = [['1', '2', '3', '4','5','6'], ['7', '8', '9'], ['10', '11', '12', '13']];
     }
 
     boxStyle = {
@@ -19,13 +19,16 @@ class LiveView extends React.Component {
         height: '100%', position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
-    }
-
+        justifyContent: 'center',
+        overflow: 'hidden'
+    };
     containerStyle = {
         position: 'absolute',
-        display: 'flex'
-    }
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '90vw',
+        justifyContent: 'space-evenly'
+    };
 
     componentDidMount = () => {
         const rect = this.selector.current.getBoundingClientRect();
@@ -35,34 +38,43 @@ class LiveView extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const element = this.state.element
-        const bubbles = this.state.bubbles
+        const element = this.state.element;
+        const bubbles = this.state.bubbles;
 
         this.containerStyle = {
             position: 'absolute',
             display: 'flex',
             left: `calc(${element.width / 2}px - ${bubbles[0] / 2}px - ${this.state.x}px)`,
             top: `calc(${element.height / 2}px - ${bubbles[1] / 2}px - ${this.state.y}px)`,
-        }
-    }
+            flexWrap: 'wrap',
+            width: '90vw',
+            justifyContent: 'space-evenly'
+        };
+    };
 
     handleMovement = (e) => {
-        const element = this.state.element
+        const element = this.state.element;
         this.setState({
-            x: (element.width / 2 - (element.right - e.clientX)) / 10,
-            y: (element.height / 2 - (element.bottom - e.clientY)) / 10
-        })
-    }
-
+            x: (element.width / 2 - (element.right - e.clientX)) / 50,
+            y: (element.height / 2 - (element.bottom - e.clientY)) / 50
+        });
+    };
     handleLeave = () => {
-        this.setState({x: 0, y: 0})
+        this.setState({x: 0, y: 0});
         this.containerStyle = {
             position: 'absolute',
             display: 'flex',
             margin: 'auto',
             marginLeft: `auto`,
-            marginTop: `auto`
-        }
+            marginTop: `auto`,
+            flexWrap: 'wrap',
+            width: '90vw',
+            justifyContent: 'space-evenly'
+        };
+    };
+    addData = (id,position) =>{
+        console.log(position)
+        this.setState({[id]: position})
     }
 
     render() {
@@ -70,8 +82,16 @@ class LiveView extends React.Component {
             <div style={this.boxStyle} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
                  onMouseLeave={this.handleLeave.bind(this)}>
                 <div id={'bubbles'} style={this.containerStyle}>
-                    <Bubble/>
-                    <Bubble/>
+                    {this.bubblesArray.map((bubbles) => (
+                            <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth:'100%'}}>
+                                {bubbles.map((bubble) => (
+                                        <Bubble key={bubble} keyReact={bubble} location={this.addData}/>
+                                    )
+                                )}
+                            </div>
+                        )
+                    )
+                    }
                 </div>
             </div>
         )

@@ -27,6 +27,10 @@ class Bubble extends React.Component {
         textAlign: 'center'
     }
 
+    componentDidMount() {
+        this.props.location(this.props.keyReact, this.selector.current.getBoundingClientRect())
+    }
+
     render() {
         return (
             <div ref={this.selector} id={'container'}
