@@ -59,7 +59,8 @@ const containerStyle = {
     width: '100vw',
     position: 'absolute',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex:'1000'
 }
 
 const menuStyle = {
