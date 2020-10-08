@@ -1,7 +1,10 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
+
 
 import Bubble from "./Bubble";
 import Arrows from "./Arrows";
+import Info from "./Info";
 
 class Cluster extends React.Component {
     constructor() {
@@ -14,6 +17,7 @@ class Cluster extends React.Component {
 
         this.flag = false;
         this.view = 1;
+        this.clicked = false;
 
         this.bubblesArray = [['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']];
         this.locations = {}
@@ -114,12 +118,15 @@ class Cluster extends React.Component {
                         {this.bubblesArray.map((bubbles) => (
                                 <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth: '100%'}}>
                                     {bubbles.map((bubble) => (
-                                            <Bubble key={bubble} keyReact={bubble} view={this.view} data={this.updateLocation}/>
+                                            <Bubble key={bubble} keyReact={bubble} clicked={this.clicked}
+                                                    view={this.view}
+                                                    data={this.updateLocation}/>
                                         )
                                     )}
                                 </div>
                             )
                         )}
+                        {this.clicked !== false ? <Info id={this.clicked} locations={this.locations}/> : null}
                     </div>
                 </div>
             )
@@ -127,11 +134,12 @@ class Cluster extends React.Component {
             return (
                 <div style={{
                     fontSize: '100px', display: 'flex', alignItems: 'center',
-                    justifyContent: 'center',height:'100%'
+                    justifyContent: 'center', height: '100%'
                 }} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
                      onMouseLeave={this.handleLeave}>
                     <div>
-                    FLOOR</div>
+                        FLOOR
+                    </div>
                 </div>
             )
         }

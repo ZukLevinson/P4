@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 
 import Menu from "./components/Main Menu/Menu";
 import LiveView from "./components/Live/LiveView";
+import Info from "./components/Live/Info";
 
 import './App.css';
 
@@ -14,7 +15,7 @@ function App() {
 
                 <Switch>
                     <Redirect exact from="/" to="/live"/>
-                    <Route path={'/live'}>
+                    <Route exact path={'/live'}>
                         <LiveView/>
                     </Route>
                     <Route path={'/stats'}>

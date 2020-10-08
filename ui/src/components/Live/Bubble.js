@@ -1,4 +1,5 @@
 import React from "react";
+import {HashLink as Link} from 'react-router-hash-link';
 
 class Bubble extends React.Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class Bubble extends React.Component {
             display: 'flex',
             flexDirection: 'column',
             cursor: 'pointer',
-            transition: '0.5s'
+            transition: '0.5s',
+            userSelect: 'none'
         },
         titleStyle: {
             margin: 'auto',
@@ -49,7 +51,6 @@ class Bubble extends React.Component {
             }
         }
     }
-
     handleHover = () => {
         this.styles.bubbleStyle = {
             width: '55%',
@@ -61,7 +62,8 @@ class Bubble extends React.Component {
             display: 'flex',
             flexDirection: 'column',
             cursor: 'pointer',
-            transition: '0.5s'
+            transition: '0.5s',
+            userSelect: 'none'
         }
     }
     handleLeave = () => {
@@ -75,30 +77,33 @@ class Bubble extends React.Component {
             display: 'flex',
             flexDirection: 'column',
             cursor: 'pointer',
-            transition: '0.5s'
+            transition: '0.5s',
+            userSelect: 'none'
         }
     }
 
     render() {
         if (this.state.key !== '0') {
             return (
-                <div className={'bubble'} ref={this.selector} id={this.props.keyReact}
-                     style={{width: '15vw', height: '15vw', display: 'flex', position: 'relative'}}
-                     onMouseOver={this.handleHover.bind(this)}
-                     onMouseLeave={this.handleLeave.bind(this)}>
-                    <div style={this.styles.bubbleStyle}>
-                        <div style={this.styles.titleStyle}>
-                            <div style={{fontSize: '18px', marginBottom: '4px'}}>{this.state.title}</div>
-                            <div>
-                                {this.props.view!==2?this.data.map((item) => (
-                                    <div key={item[0]}
-                                         style={{fontSize: '12px', marginBottom: '2px'}}>{item[0]}: {item[1]}</div>
-                                )):null
-                                }
+                <Link to={`/live/${this.state.key}`}>
+                    <div className={'bubble'} ref={this.selector} id={this.props.keyReact}
+                         style={{width: '15vw', height: '15vw', display: 'flex', position: 'relative'}}
+                         onMouseOver={this.handleHover.bind(this)}
+                         onMouseLeave={this.handleLeave.bind(this)}>
+                        <div style={this.styles.bubbleStyle}>
+                            <div style={this.styles.titleStyle}>
+                                <div style={{fontSize: '18px', marginBottom: '4px'}}>{this.state.title}</div>
+                                <div>
+                                    {this.props.view !== 2 ? this.data.map((item) => (
+                                        <div key={item[0]}
+                                             style={{fontSize: '12px', marginBottom: '2px'}}>{item[0]}: {item[1]}</div>
+                                    )) : null
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             )
         } else {
             return (
