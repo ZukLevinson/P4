@@ -1,47 +1,112 @@
 import React from "react";
 
 class Bubble extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            title: 'פרזול',
+            title: 'shoeing',
             x: 0,
-            y: 0
+            y: 0,
+            data: {
+                production: '3',
+                capacity: '93%',
+                future: '8'
+            },
+            key: this.props.keyReact
         }
+        this.data = [];
         this.selector = React.createRef();
     }
 
-    bubbleStyle = {
-        width: '50%',
-        height: '50%',
-        background: '#F3F3F3',
-        borderRadius: '5vw',
-        boxShadow: '0 0 40px rgba(46, 46, 46, 0.22)',
-        margin: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-        cursor: 'pointer'
-    }
-    titleStyle = {
-        margin: 'auto',
-        textAlign: 'center'
+    styles = {
+        bubbleStyle: {
+            width: '50%',
+            height: '50%',
+            background: '#f9f9f9',
+            borderRadius: '5vw',
+            boxShadow: '0 0 20px rgba(46, 46, 46, 0.11)',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            cursor: 'pointer',
+            transition: '1s'
+        },
+        titleStyle: {
+            margin: 'auto',
+            textTransform: 'capitalize', textAlign: 'center'
+        }
     }
 
     componentDidMount() {
-        this.props.location(this.props.keyReact, this.selector.current.getBoundingClientRect())
+        this.jsonToData();
+        this.props.data(this.props.keyReact, this.selector.current.getBoundingClientRect())
+    }
+
+    jsonToData = () => {
+        for (let x in this.state.data) {
+            if (this.state.data.hasOwnProperty(x)) {
+                this.data.push([x, this.state.data[x]])
+            }
+        }
+    }
+
+    handleHover = () => {
+        this.styles.bubbleStyle = {
+            width: '55%',
+            height: '55%',
+            background: '#f9f9f9',
+            borderRadius: '5vw',
+            boxShadow: '0 0 20px rgba(46, 46, 46, 0.22)',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            cursor: 'pointer',
+            transition: '1s'
+        }
+    }
+    handleLeave = () => {
+        this.styles.bubbleStyle = {
+            width: '50%',
+            height: '50%',
+            background: '#f9f9f9',
+            borderRadius: '5vw',
+            boxShadow: '0 0 40px rgba(46, 46, 46, 0.11)',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            cursor: 'pointer',
+            transition: '1s'
+        }
     }
 
     render() {
-        return (
-            <div ref={this.selector} id={'container'}
-                 style={{width: '15vw', height: '15vw', display: 'flex', position: 'relative'}}>
-                <div style={this.bubbleStyle}>
-                    <div style={this.titleStyle}>
-                        {this.state.title}
+        if (this.state.key !== '0') {
+            return (
+                <div className={'bubble'} ref={this.selector} id={this.props.keyReact}
+                     style={{width: '15vw', height: '15vw', display: 'flex', position: 'relative'}}
+                     onMouseOver={this.handleHover.bind(this)}
+                     onMouseLeave={this.handleLeave.bind(this)}>
+                    <div style={this.styles.bubbleStyle}>
+                        <div style={this.styles.titleStyle}>
+                            <div style={{fontSize: '18px', marginBottom: '4px'}}>{this.state.title}</div>
+                            <div>
+                                {this.data.map((item) => (
+                                    <div key={item[0]}
+                                         style={{fontSize: '12px', marginBottom: '2px'}}>{item[0]}: {item[1]}</div>
+                                ))
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className={'bubble'} ref={this.selector} id={this.props.keyReact}
+                     style={{width: '15vw', height: '15vw', display: 'flex', position: 'relative'}}>
+                </div>
+            )
+        }
     }
 }
 

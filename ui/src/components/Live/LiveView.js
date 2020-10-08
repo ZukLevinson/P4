@@ -1,6 +1,7 @@
 import React from "react";
 
 import Bubble from "./Bubble";
+import Arrows from "./Arrows";
 
 class LiveView extends React.Component {
     constructor() {
@@ -11,12 +12,15 @@ class LiveView extends React.Component {
         };
         this.selector = React.createRef();
 
-        this.bubblesArray = [['1', '2', '3', '4','5','6'], ['7', '8', '9'], ['10', '11', '12', '13']];
+        this.flag = false;
+
+        this.bubblesArray = [['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']];
+        this.locations = {}
     }
 
     boxStyle = {
         width: '100%',
-        height: '100%', position: 'relative',
+        height: '93%', position: 'relative',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -35,6 +39,7 @@ class LiveView extends React.Component {
         const bubbles = document.getElementById('bubbles')
         this.setState({element: rect})
         this.setState({bubbles: [bubbles.offsetWidth, bubbles.offsetHeight]})
+        this.launchArrows().then()
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -54,10 +59,12 @@ class LiveView extends React.Component {
 
     handleMovement = (e) => {
         const element = this.state.element;
-        this.setState({
-            x: (element.width / 2 - (element.right - e.clientX)) / 50,
-            y: (element.height / 2 - (element.bottom - e.clientY)) / 50
-        });
+        if (Math.abs(this.state.x - ((element.width / 2 - (element.right - e.clientX)) / 50)) >= 1 || Math.abs(this.state.y - ((element.height / 2 - (element.bottom - e.clientY)) / 50)) >= 1) {
+            this.setState({
+                x: (element.width / 2 - (element.right - e.clientX)) / 50,
+                y: (element.height / 2 - (element.bottom - e.clientY)) / 50
+            });
+        }
     };
     handleLeave = () => {
         this.setState({x: 0, y: 0});
@@ -72,9 +79,12 @@ class LiveView extends React.Component {
             justifyContent: 'space-evenly'
         };
     };
-    addData = (id,position) =>{
-        console.log(position)
-        this.setState({[id]: position})
+    updateLocation = (id, position) => {
+        this.locations["'"+id+"'"] = position
+    }
+
+    launchArrows = async () => {
+        if (this.locations !== null) return this.flag = true
     }
 
     render() {
@@ -82,16 +92,16 @@ class LiveView extends React.Component {
             <div style={this.boxStyle} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
                  onMouseLeave={this.handleLeave.bind(this)}>
                 <div id={'bubbles'} style={this.containerStyle}>
+                    {this.flag ? <Arrows locations={this.locations}/> : null}
                     {this.bubblesArray.map((bubbles) => (
-                            <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth:'100%'}}>
+                            <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth: '100%'}}>
                                 {bubbles.map((bubble) => (
-                                        <Bubble key={bubble} keyReact={bubble} location={this.addData}/>
+                                        <Bubble key={bubble} keyReact={bubble} data={this.updateLocation}/>
                                     )
                                 )}
                             </div>
                         )
-                    )
-                    }
+                    )}
                 </div>
             </div>
         )
