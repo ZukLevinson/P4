@@ -36,7 +36,8 @@ const mainStyle = {
     width: '100vw',
     height: '100vh',
     background: '#F3F3F3',
-    display: 'flex'
+    display: 'flex',
+    overflow:'hidden'
 }
 
 export default App;

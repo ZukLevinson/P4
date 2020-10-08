@@ -1,110 +1,76 @@
 import React from "react";
 
-import Bubble from "./Bubble";
-import Arrows from "./Arrows";
+import Cluster from "./Cluster";
+import Slider from "./Slider";
 
 class LiveView extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            x: 0,
-            y: 0
-        };
-        this.selector = React.createRef();
-
-        this.flag = false;
-
-        this.bubblesArray = [['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']];
-        this.locations = {}
+    constructor(props) {
+        super(props);
+        this.state = {scale: 1}
+        this.bubbleArrays = [[['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']]]
     }
 
-    boxStyle = {
-        width: '100%',
-        height: '93%', position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden'
-    };
-    containerStyle = {
+    zoomIn = () => {
+        if (this.state.scale < 1)
+            this.setState({scale: this.state.scale + 0.1});
+    }
+
+    zoomOut = () => {
+        if (this.state.scale >= 0.3)
+            this.setState({scale: this.state.scale - 0.1});
+    }
+
+    sideBarStyle = {
         position: 'absolute',
+        zIndex: '1000',
+        right: '20px',
+        width: '40px',
+        height: '300px',
+        background: 'rgb(243, 243, 243)',
+        top: '0',
+        bottom: '0',
+        margin: 'auto',
         display: 'flex',
-        flexWrap: 'wrap',
-        width: '90vw',
-        justifyContent: 'space-evenly'
-    };
-
-    componentDidMount = () => {
-        const rect = this.selector.current.getBoundingClientRect();
-        const bubbles = document.getElementById('bubbles')
-        this.setState({element: rect})
-        this.setState({bubbles: [bubbles.offsetWidth, bubbles.offsetHeight]})
-        this.launchArrows().then()
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const element = this.state.element;
-        const bubbles = this.state.bubbles;
-
-        this.containerStyle = {
-            position: 'absolute',
-            display: 'flex',
-            left: `calc(${element.width / 2}px - ${bubbles[0] / 2}px - ${this.state.x}px)`,
-            top: `calc(${element.height / 2}px - ${bubbles[1] / 2}px - ${this.state.y}px)`,
-            flexWrap: 'wrap',
-            width: '90vw',
-            justifyContent: 'space-evenly'
-        };
-    };
-
-    handleMovement = (e) => {
-        const element = this.state.element;
-        if (Math.abs(this.state.x - ((element.width / 2 - (element.right - e.clientX)) / 50)) >= 1 || Math.abs(this.state.y - ((element.height / 2 - (element.bottom - e.clientY)) / 50)) >= 1) {
-            this.setState({
-                x: (element.width / 2 - (element.right - e.clientX)) / 50,
-                y: (element.height / 2 - (element.bottom - e.clientY)) / 50
-            });
-        }
-    };
-    handleLeave = () => {
-        this.setState({x: 0, y: 0});
-        this.containerStyle = {
-            position: 'absolute',
-            display: 'flex',
-            margin: 'auto',
-            marginLeft: `auto`,
-            marginTop: `auto`,
-            flexWrap: 'wrap',
-            width: '90vw',
-            justifyContent: 'space-evenly'
-        };
-    };
-    updateLocation = (id, position) => {
-        this.locations["'"+id+"'"] = position
+        flexDirection: 'column',
+        borderRadius: '20px',
+        boxShadow: '0 0 40px rgba(46, 46, 46, 0.11)',
+        userSelect: 'none'
     }
-
-    launchArrows = async () => {
-        if (this.locations !== null) return this.flag = true
+    btnStyle = {
+        height: '20px',
+        margin: '13px',
+        cursor: 'pointer'
     }
 
     render() {
         return (
-            <div style={this.boxStyle} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
-                 onMouseLeave={this.handleLeave.bind(this)}>
-                <div id={'bubbles'} style={this.containerStyle}>
-                    {this.flag ? <Arrows locations={this.locations}/> : null}
-                    {this.bubblesArray.map((bubbles) => (
-                            <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth: '100%'}}>
-                                {bubbles.map((bubble) => (
-                                        <Bubble key={bubble} keyReact={bubble} data={this.updateLocation}/>
-                                    )
-                                )}
-                            </div>
-                        )
-                    )}
+            <div style={{width: '100%', height: '100%', overflow: 'hidden'}}>
+                <div style={this.sideBarStyle}>
+                    <div style={this.btnStyle} onClick={this.zoomIn}>
+                        <svg viewBox={"0 0 40 40"}>
+                            <polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22 "/>
+                        </svg>
+                    </div>
+                    <div id={'scroller'} style={{flex: '1'}}>
+                        <Slider scale={this.state.scale} in={this.zoomIn.bind(this)} out={this.zoomOut}/>
+                    </div>
+                    <div style={this.btnStyle} onClick={this.zoomOut}>
+                        <svg viewBox={"0 0 40 40"}>
+                            <rect y="20" width="42" height="2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div style={{
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'hidden',
+                    transform: `scale(${this.state.scale})`
+                }}>
+                    <Cluster data={this.bubbleArrays[0]} scale={this.state.scale}/>
                 </div>
             </div>
-        )
+
+        );
     }
 }
 

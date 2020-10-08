@@ -22,14 +22,14 @@ class Bubble extends React.Component {
         bubbleStyle: {
             width: '50%',
             height: '50%',
-            background: '#f9f9f9',
+            background: 'rgba(249,249,249,0.95)',
             borderRadius: '5vw',
             boxShadow: '0 0 20px rgba(46, 46, 46, 0.11)',
             margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
             cursor: 'pointer',
-            transition: '1s'
+            transition: '0.5s'
         },
         titleStyle: {
             margin: 'auto',
@@ -54,28 +54,28 @@ class Bubble extends React.Component {
         this.styles.bubbleStyle = {
             width: '55%',
             height: '55%',
-            background: '#f9f9f9',
+            background: 'rgba(249,249,249,0.95)',
             borderRadius: '5vw',
             boxShadow: '0 0 20px rgba(46, 46, 46, 0.22)',
             margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
             cursor: 'pointer',
-            transition: '1s'
+            transition: '0.5s'
         }
     }
     handleLeave = () => {
         this.styles.bubbleStyle = {
             width: '50%',
             height: '50%',
-            background: '#f9f9f9',
+            background: 'rgba(249,249,249,0.95)',
             borderRadius: '5vw',
             boxShadow: '0 0 40px rgba(46, 46, 46, 0.11)',
             margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
             cursor: 'pointer',
-            transition: '1s'
+            transition: '0.5s'
         }
     }
 
@@ -90,10 +90,10 @@ class Bubble extends React.Component {
                         <div style={this.styles.titleStyle}>
                             <div style={{fontSize: '18px', marginBottom: '4px'}}>{this.state.title}</div>
                             <div>
-                                {this.data.map((item) => (
+                                {this.props.view!==2?this.data.map((item) => (
                                     <div key={item[0]}
                                          style={{fontSize: '12px', marginBottom: '2px'}}>{item[0]}: {item[1]}</div>
-                                ))
+                                )):null
                                 }
                             </div>
                         </div>

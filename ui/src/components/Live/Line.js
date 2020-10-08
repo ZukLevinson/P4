@@ -10,16 +10,16 @@ class Line extends React.Component {
             if (this.state.y1 > this.state.y2) {
                 this.mini = {
                     x1: (this.state.x1 + this.state.x2) / 2,
-                    x2: ((this.state.x1 + this.state.x2) / 2) + (60 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
+                    x2: ((this.state.x1 + this.state.x2) / 2) + (70 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
                     y1: (this.state.y1 + this.state.y2) / 2,
-                    y2: ((this.state.y1 + this.state.y2) / 2) + (this.slope * 60 / Math.sqrt(Math.pow(this.slope, 2) + 1))
+                    y2: ((this.state.y1 + this.state.y2) / 2) + (this.slope * 70 / Math.sqrt(Math.pow(this.slope, 2) + 1))
                 }
             } else {
                 this.mini = {
                     x1: (this.state.x1 + this.state.x2) / 2,
-                    x2: ((this.state.x1 + this.state.x2) / 2) + (60 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
+                    x2: ((this.state.x1 + this.state.x2) / 2) + (70 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
                     y1: (this.state.y1 + this.state.y2) / 2,
-                    y2: ((this.state.y1 + this.state.y2) / 2) + (this.slope * 60 / Math.sqrt(Math.pow(this.slope, 2) + 1))
+                    y2: ((this.state.y1 + this.state.y2) / 2) + (this.slope * 70 / Math.sqrt(Math.pow(this.slope, 2) + 1))
                 }
             }
         } else {
@@ -27,16 +27,16 @@ class Line extends React.Component {
                 if (this.state.y1 > this.state.y2) {
                     this.mini = {
                         x1: (this.state.x1 + this.state.x2) / 2,
-                        x2: ((this.state.x1 + this.state.x2) / 2) - (60 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
+                        x2: ((this.state.x1 + this.state.x2) / 2) - (70 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
                         y1: (this.state.y1 + this.state.y2) / 2,
-                        y2: ((this.state.y1 + this.state.y2) / 2) - (this.slope * 60 / Math.sqrt(Math.pow(this.slope, 2) + 1))
+                        y2: ((this.state.y1 + this.state.y2) / 2) - (this.slope * 70 / Math.sqrt(Math.pow(this.slope, 2) + 1))
                     }
                 } else {
                     this.mini = {
                         x1: (this.state.x1 + this.state.x2) / 2,
-                        x2: ((this.state.x1 + this.state.x2) / 2) - (60 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
+                        x2: ((this.state.x1 + this.state.x2) / 2) - (70 / Math.sqrt(Math.pow(this.slope, 2) + 1)),
                         y1: (this.state.y1 + this.state.y2) / 2,
-                        y2: ((this.state.y1 + this.state.y2) / 2) - (this.slope * 60 / Math.sqrt(Math.pow(this.slope, 2) + 1))
+                        y2: ((this.state.y1 + this.state.y2) / 2) - (this.slope * 70 / Math.sqrt(Math.pow(this.slope, 2) + 1))
                     }
                 }
             } else {
