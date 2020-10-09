@@ -49,6 +49,9 @@ class Line extends React.Component {
             }
         }
     }
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextState !== this.state;
+    }
 
     render() {
         return (

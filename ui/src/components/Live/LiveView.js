@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import Cluster from "./Cluster";
 import Slider from "./Slider";
@@ -6,8 +7,20 @@ import Slider from "./Slider";
 class LiveView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {scale: 1}
-        this.bubbleArrays = [[['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']]]
+        this.state = {
+            scale: 1,
+            bubblesArray: []
+        }
+        this.loaded = false;
+
+
+    }
+
+    componentDidMount() {
+        axios.get('/api/bubbles_gen').then((response) => {
+            this.loaded = true;
+            this.setState({bubblesArray: response.data.bubbles,arrowArray:response.data.arrows});
+        }).catch(err => console.log(err))
     }
 
     zoomIn = () => {
@@ -16,7 +29,7 @@ class LiveView extends React.Component {
     }
 
     zoomOut = () => {
-        if (this.state.scale >= 0.3)
+        if (this.state.scale > 0.3)
             this.setState({scale: this.state.scale - 0.1});
     }
 
@@ -66,7 +79,7 @@ class LiveView extends React.Component {
                     overflow: 'hidden',
                     transform: `scale(${this.state.scale})`
                 }}>
-                    <Cluster data={this.bubbleArrays[0]} scale={this.state.scale}/>
+                    {this.loaded ? <Cluster bubbles={this.state.bubblesArray} arrows={this.state.arrowArray} scale={this.state.scale}/> : null}
                 </div>
             </div>
 

@@ -13,7 +13,7 @@ class Team extends React.Component {
         width:'20%',
         margin:'10px',
         borderRadius:'10px',
-        boxShadow: '0 0 10px rgba(46, 46, 46, 0.11)',
+        boxShadow: '0 0 10px rgba(46, 46, 46, 0.07)',
     }
     titleStyle = {
         fontWeight:'600',

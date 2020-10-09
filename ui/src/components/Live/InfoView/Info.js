@@ -13,7 +13,8 @@ class Info extends React.Component {
                 production: '3',
                 capacity: '93%',
                 future: '8'
-            }
+            },
+            keyId: this.props.keyId
         }
 
         this.selector = React.createRef();
@@ -155,11 +156,12 @@ class Info extends React.Component {
             height: '100%'
         },
         events: {
-            width: '28%',
-            height: '91%',
-            marginTop:'2%',
-            borderRadius:'15px',
-            boxShadow: 'rgba(46, 46, 46, 0.11) 0px 0px 20px'
+            width: '26%',
+            height: '88%',
+            marginTop: '2%',
+            borderRadius: '15px',
+            boxShadow: 'rgba(46, 46, 46, 0.07) 0px 0px 10px',
+            padding: '1%'
         },
         miniTitle: {
             fontSize: '25px',
@@ -180,12 +182,12 @@ class Info extends React.Component {
             <div style={this.bgStyle} ref={this.selector}>
                 <div style={this.bubbleContainerStyle}>
                     <Bubble keyReact={this.props.keyId} clicked={this.props.clicked} adapt={false}
-                            data={(id, location) => null}/>
+                            data={(id, location) => null} view={2}/>
                 </div>
                 <div style={this.infoBox}>
                     <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
                         <div style={this.styles.title}>
-                            Shoeing
+                            Shoeing #{this.props.keyId}
                             <div style={this.styles.quickInfo}>
                                 {this.data.map((item) => (
                                     <div key={item[0]}
@@ -245,9 +247,10 @@ class Info extends React.Component {
                                     }}>
                                         <div style={{display: 'flex', width: '100%', height: '100%'}}>
                                             {this.related.map((bubble) => (
-                                                <div style={{width: 'inherit', height: 'inherit', marginRight: '10px'}}>
+                                                <div key={bubble}
+                                                     style={{width: 'inherit', height: 'inherit', marginRight: '10px'}}>
                                                     <Bubble keyReact={bubble} key={bubble} clicked={this.props.clicked}
-                                                            adapt={true} view={2} data={(id, location) => null}/>
+                                                            adapt={true} view={false} data={(id, location) => null}/>
                                                 </div>
                                             ))}
 
@@ -255,8 +258,13 @@ class Info extends React.Component {
                                     </div>
                                 </div>
                             </div>
+                            {
+                                //TODO Add events section
+                            }
                             <div style={this.styles.events}>
-
+                                <div style={this.styles.miniTitle}>
+                                    Events:
+                                </div>
                             </div>
                         </div>
                     </div>

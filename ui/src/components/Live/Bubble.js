@@ -12,11 +12,16 @@ class Bubble extends React.Component {
                 capacity: '93%',
                 future: '8'
             },
-            key: this.props.keyReact
+            key: this.props.keyReact,
+            view: this.props.view === 1,
+            adapt: this.props.adapt
         }
         this.data = [];
         this.selector = React.createRef();
-        if(this.props.adapt){
+        this.jsonToData();
+
+        //Adapt bubble style if needed
+        if (this.props.adapt) {
             this.styles.containerStyle = {
                 width: '100px',
                 height: 'inherit',
@@ -36,6 +41,8 @@ class Bubble extends React.Component {
                 userSelect: 'none'
             }
         }
+
+        this.titleSize = 18;
     }
 
     styles = {
@@ -66,11 +73,11 @@ class Bubble extends React.Component {
     }
 
     componentDidMount() {
-        this.jsonToData();
         this.props.data(this.props.keyReact, this.selector.current.getBoundingClientRect())
 
         if (this.props.adapt) {
-            const element=this.selector.current.getBoundingClientRect()
+            this.titleSize = 14;
+            const element = this.selector.current.getBoundingClientRect()
             this.styles.containerStyle = {
                 width: `${element.height}px`,
                 height: `${element.height}px`,
@@ -82,7 +89,7 @@ class Bubble extends React.Component {
                 height: '100%',
                 background: 'rgba(249,249,249,0.95)',
                 borderRadius: '5vw',
-                boxShadow: '0 0 20px rgba(46, 46, 46, 0.11)',
+                boxShadow: '0 0 10px rgba(46, 46, 46, 0.07)',
                 margin: 'auto',
                 display: 'flex',
                 flexDirection: 'column',
@@ -92,6 +99,10 @@ class Bubble extends React.Component {
             }
             this.forceUpdate()
         }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.keyReact !== this.props.keyReact) this.setState({key: this.props.keyReact})
     }
 
     jsonToData = () => {
@@ -137,14 +148,17 @@ class Bubble extends React.Component {
             return (
                 <div className={'bubble'} ref={this.selector} id={this.props.keyReact}
                      style={this.styles.containerStyle}
-                     onMouseOver={!this.props.adapt?this.handleHover.bind(this):null}
-                     onMouseLeave={!this.props.adapt?this.handleLeave.bind(this):null}
+                     onMouseOver={!this.state.adapt ? this.handleHover.bind(this) : null}
+                     onMouseLeave={!this.state.adapt ? this.handleLeave.bind(this) : null}
                      onClick={this.props.clicked.bind(this, this.state.key)}>
                     <div style={this.styles.bubbleStyle}>
                         <div style={this.styles.titleStyle}>
-                            <div style={{fontSize: '18px', marginBottom: '4px'}}>{this.state.title}</div>
+                            <div style={{
+                                fontSize: `${this.titleSize}px`,
+                                marginBottom: '4px'
+                            }}>{this.state.title} {this.props.keyReact}</div>
                             <div>
-                                {this.props.view !== 2 ? this.data.map((item) => (
+                                {this.props.view ? this.data.map((item) => (
                                     <div key={item[0]}
                                          style={{fontSize: '12px', marginBottom: '2px'}}>{item[0]}: {item[1]}</div>
                                 )) : null

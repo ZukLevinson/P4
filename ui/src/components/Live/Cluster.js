@@ -1,23 +1,25 @@
 import React from "react";
 
-import Bubble from "./Bubble";
 import Arrows from "./Arrows";
 import Info from "./InfoView/Info.js";
+import Bubbles from "./Bubbles";
 
 class Cluster extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             x: 0,
-            y: 0
+            y: 0,
+            view: this.props.scale >= 0.8
         };
         this.selector = React.createRef();
 
         this.flag = false;
-        this.view = 1;
         this.clickedId = null;
 
         this.bubblesArray = [['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']];
+        this.bubblesArray = this.props.bubbles;
+        this.arrows = this.props.arrows;
         this.locations = {}
     }
 
@@ -38,6 +40,7 @@ class Cluster extends React.Component {
         width: '90vw',
         height: '100%',
         justifyContent: 'space-evenly',
+        flexDirection: 'column'
     };
 
     componentDidMount = () => {
@@ -45,7 +48,6 @@ class Cluster extends React.Component {
         const bubbles = document.getElementById('bubbles')
         this.setState({element: rect})
         this.setState({bubbles: [bubbles.offsetWidth, bubbles.offsetHeight]})
-        this.launchArrows().then()
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -60,10 +62,12 @@ class Cluster extends React.Component {
             top: `calc(${element.height / 2}px - ${bubbles[1] / 2}px - ${this.state.y}px)`,
             flexWrap: 'wrap',
             width: '90vw',
-            justifyContent: 'space-evenly'
+            justifyContent: 'space-evenly',
+            flexDirection: 'column'
         };
-        this.view = this.props.scale >= 0.7 ? 1 : 2;
-        this.flag = this.props.scale > 0.5;
+
+        if (this.props.scale < 0.8 && prevState.view === true) this.setState({view: false})
+        if (this.props.scale >= 0.8 && prevState.view === false) this.setState({view: true})
     };
 
     handleMovement = (e) => {
@@ -86,18 +90,17 @@ class Cluster extends React.Component {
             flexWrap: 'wrap',
             width: '90vw',
             height: '100%',
-            justifyContent: 'space-evenly'
+            justifyContent: 'space-evenly',
+            flexDirection: 'column'
         };
     };
 
     updateLocation = (id, position) => {
-        this.locations["'" + id + "'"] = position
-    };
-    launchArrows = async () => {
-        if (this.locations !== null) return this.flag = true
+        if (this.locations["'" + id + "'"] === undefined)
+            this.locations["'" + id + "'"] = position
     };
     bubbleClicked = (id) => {
-        if (this.clickedId === null) {
+        if (this.clickedId === null || this.clickedId !== id) {
             this.clickedId = id;
         } else {
             this.clickedId = null;
@@ -105,13 +108,18 @@ class Cluster extends React.Component {
         this.forceUpdate();
     };
 
+    complete = () => {
+        this.flag = true;
+        this.setState({locations: this.locations, arrows: this.arrows})
+    }
+
     render() {
         if (this.props.scale > 0.5) {
             return (
                 <div style={this.boxStyle} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
                      onMouseLeave={this.handleLeave}>
                     <div id={'bubbles'} style={this.containerStyle} onClick={this.handleClick}>
-                        {this.state.view !== 2 && this.clickedId === null ?
+                        {this.state.view && this.clickedId === null ?
                             <div style={{
                                 position: 'absolute',
                                 bottom: '50px',
@@ -120,23 +128,17 @@ class Cluster extends React.Component {
                             }}>
                                 Cluster View: Floor
                             </div> : null}
-                        {this.flag && this.clickedId === null ? <Arrows locations={this.locations}/> : null}
-                        {this.clickedId === null ? this.bubblesArray.map((bubbles) => (
-                                <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth: '100%'}}>
-                                    {bubbles.map((bubble) => (
-                                            <Bubble key={bubble} keyReact={bubble}
-                                                    clicked={this.bubbleClicked}
-                                                    clickedId={this.clickedId}
-                                                    view={this.view}
-                                                    data={this.updateLocation}
-                                                    adapt={false}/>
-                                        )
-                                    )}
-                                </div>
-                            )
-                        ) : null}
-                        {this.clickedId !== null ? <Info keyId={this.clickedId} locations={this.locations}
-                                                         clicked={this.bubbleClicked}/> : null}
+                        {this.flag && this.clickedId === null ?
+                            <Arrows locations={this.state.locations} arrows={this.state.arrows}/> : null}
+                        {this.clickedId === null ? <Bubbles bubbles={this.bubblesArray} complete={this.complete}
+                                                            clicked={this.bubbleClicked}
+                                                            clickedId={this.clickedId}
+                                                            view={this.state.view}
+                                                            data={this.updateLocation}
+                                                            adapt={false}/> : null}
+                        {this.clickedId !== null ?
+                            <Info keyId={this.clickedId} data={this.updateLocation} locations={this.locations}
+                                  clicked={this.bubbleClicked}/> : null}
                     </div>
                 </div>
             )
