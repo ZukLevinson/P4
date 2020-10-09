@@ -2,6 +2,7 @@ import React from "react";
 
 import Bubble from ".././Bubble";
 import Team from "./Team";
+import Project from "./Project";
 
 class Info extends React.Component {
     //TODO Fix width animation's extra pixels
@@ -36,9 +37,7 @@ class Info extends React.Component {
             }
 
         ];
-        this.current = [
-
-        ]
+        this.current = ['111','222','333','444','555','666','777','888','999','101010','111111']
 
         this.bgStyle = {
             width: '100%',
@@ -193,7 +192,7 @@ class Info extends React.Component {
                                     <div style={this.styles.miniTitle}>
                                         Teams
                                     </div>
-                                    <div>
+                                    <div style={{maxHeight:'150px', overflow:'auto'}}>
                                         {this.teams.map((team) => (
                                             <Team key={team.name} data={team}/>
                                         ))}
@@ -202,6 +201,21 @@ class Info extends React.Component {
                                 <div style={this.styles.tab}>
                                     <div style={this.styles.miniTitle}>
                                         Current Projects
+                                    </div>
+                                    <div style={{maxHeight:'150px', overflow:'auto'}}>
+                                        {this.current.map((project)=>(
+                                            <Project key={project} id={project} />
+                                        ))}
+                                    </div>
+                                </div>
+                                <div style={this.styles.tab}>
+                                    <div style={this.styles.miniTitle}>
+                                        Upcoming Projects
+                                    </div>
+                                    <div style={{maxHeight:'150px', overflow:'auto'}}>
+                                        {this.current.map((project)=>(
+                                            <Project key={project} id={project} />
+                                        ))}
                                     </div>
                                 </div>
                             </div>
