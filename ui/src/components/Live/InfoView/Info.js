@@ -1,6 +1,7 @@
 import React from "react";
 
-import Bubble from "./Bubble";
+import Bubble from ".././Bubble";
+import Team from "./Team";
 
 class Info extends React.Component {
     //TODO Fix width animation's extra pixels
@@ -18,6 +19,26 @@ class Info extends React.Component {
         this.location = this.props.locations["'" + this.props.keyId + "'"];
         this.side = '';
         this.data = [];
+
+        this.teams = [
+            {
+                name: 'Team1',
+                employees: ['111', '222', '333']
+            }, {
+                name: 'Team2',
+                employees: ['111', '222', '333']
+            }, {
+                name: 'Team3',
+                employees: ['111', '222', '333']
+            }, {
+                name: 'Team4',
+                employees: ['111', '222', '333']
+            }
+
+        ];
+        this.current = [
+
+        ]
 
         this.bgStyle = {
             width: '100%',
@@ -93,6 +114,7 @@ class Info extends React.Component {
         }
         this.forceUpdate()
     }
+
     jsonToData = () => {
         for (let x in this.state.data) {
             if (this.state.data.hasOwnProperty(x)) {
@@ -104,17 +126,44 @@ class Info extends React.Component {
     styles = {
         title: {
             fontSize: '50px',
-            margin: '30px',
-            display:'flex'
+            marginLeft: '30px',
+            marginTop: '30px',
+            display: 'flex'
         },
         quickInfo: {
-            display:'flex',
-            flexWrap:'wrap',
-            width:'90px',
-            borderLeft:'1px solid black',
-            paddingLeft:'10px',
-            marginLeft:'10px',
-            textTransform:'uppercase'
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '90px',
+            borderLeft: '1px solid black',
+            paddingLeft: '10px',
+            marginLeft: '10px',
+            textTransform: 'uppercase'
+        },
+        cluster: {
+            fontSize: '18px',
+            color: 'gray',
+            marginLeft: '30px',
+            marginBottom: '40px'
+        },
+        data: {
+            display: 'flex',
+            width: '100%',
+            height: '100%'
+        },
+        tabs: {
+            width: '70%',
+            height: '100%'
+        },
+        events: {
+            width: '30%',
+            height: '100%'
+        },
+        miniTitle: {
+            fontSize: '25px',
+            fontWeight: '500'
+        },
+        tab: {
+            padding: '10px 30px'
         }
     }
 
@@ -125,7 +174,7 @@ class Info extends React.Component {
                     <Bubble keyReact={this.props.keyId} clicked={this.props.clicked} data={(id, location) => null}/>
                 </div>
                 <div style={this.infoBox}>
-                    <div style={{width: '100%', height: '100%'}}>
+                    <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
                         <div style={this.styles.title}>
                             Shoeing
                             <div style={this.styles.quickInfo}>
@@ -135,7 +184,31 @@ class Info extends React.Component {
                                 ))}
                             </div>
                         </div>
+                        <div style={this.styles.cluster}>
+                            Floor Cluster
+                        </div>
+                        <div style={this.styles.data}>
+                            <div style={this.styles.tabs}>
+                                <div style={this.styles.tab}>
+                                    <div style={this.styles.miniTitle}>
+                                        Teams
+                                    </div>
+                                    <div>
+                                        {this.teams.map((team) => (
+                                            <Team key={team.name} data={team}/>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div style={this.styles.tab}>
+                                    <div style={this.styles.miniTitle}>
+                                        Current Projects
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={this.styles.events}>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

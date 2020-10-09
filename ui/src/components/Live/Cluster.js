@@ -2,7 +2,7 @@ import React from "react";
 
 import Bubble from "./Bubble";
 import Arrows from "./Arrows";
-import Info from "./Info";
+import Info from "./InfoView/Info.js";
 
 class Cluster extends React.Component {
     constructor() {
@@ -111,7 +111,7 @@ class Cluster extends React.Component {
                 <div style={this.boxStyle} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
                      onMouseLeave={this.handleLeave}>
                     <div id={'bubbles'} style={this.containerStyle} onClick={this.handleClick}>
-                        {this.state.view !== 2 && this.clickedId === null?
+                        {this.state.view !== 2 && this.clickedId === null ?
                             <div style={{
                                 position: 'absolute',
                                 bottom: '50px',
@@ -134,7 +134,8 @@ class Cluster extends React.Component {
                                 </div>
                             )
                         ) : null}
-                        {this.clickedId !== null ? <Info keyId={this.clickedId} locations={this.locations} clicked={this.bubbleClicked}/> : null}
+                        {this.clickedId !== null ? <Info keyId={this.clickedId} locations={this.locations}
+                                                         clicked={this.bubbleClicked}/> : null}
                     </div>
                 </div>
             )

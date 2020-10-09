@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 
 import Menu from "./components/Main Menu/Menu";
 import LiveView from "./components/Live/LiveView";
-import Info from "./components/Live/Info";
 
 import './App.css';
 
