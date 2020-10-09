@@ -37,7 +37,8 @@ class Info extends React.Component {
             }
 
         ];
-        this.current = ['111','222','333','444','555','666','777','888','999','101010','111111']
+        this.current = ['111', '222', '333', '444', '555', '666', '777', '888', '999', '101010', '111111']
+        this.related = ['1', '3', '4', '5', '6']
 
         this.bgStyle = {
             width: '100%',
@@ -154,8 +155,11 @@ class Info extends React.Component {
             height: '100%'
         },
         events: {
-            width: '30%',
-            height: '100%'
+            width: '28%',
+            height: '91%',
+            marginTop:'2%',
+            borderRadius:'15px',
+            boxShadow: 'rgba(46, 46, 46, 0.11) 0px 0px 20px'
         },
         miniTitle: {
             fontSize: '25px',
@@ -163,6 +167,11 @@ class Info extends React.Component {
         },
         tab: {
             padding: '10px 30px'
+        },
+        bubblesTab: {
+            padding: '10px 30px',
+            display: 'flex',
+            maxHeight: '80px'
         }
     }
 
@@ -170,7 +179,8 @@ class Info extends React.Component {
         return (
             <div style={this.bgStyle} ref={this.selector}>
                 <div style={this.bubbleContainerStyle}>
-                    <Bubble keyReact={this.props.keyId} clicked={this.props.clicked} data={(id, location) => null}/>
+                    <Bubble keyReact={this.props.keyId} clicked={this.props.clicked} adapt={false}
+                            data={(id, location) => null}/>
                 </div>
                 <div style={this.infoBox}>
                     <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}}>
@@ -192,7 +202,7 @@ class Info extends React.Component {
                                     <div style={this.styles.miniTitle}>
                                         Teams
                                     </div>
-                                    <div style={{maxHeight:'150px', overflow:'auto'}}>
+                                    <div style={{maxHeight: '150px', overflow: 'auto'}}>
                                         {this.teams.map((team) => (
                                             <Team key={team.name} data={team}/>
                                         ))}
@@ -202,9 +212,9 @@ class Info extends React.Component {
                                     <div style={this.styles.miniTitle}>
                                         Current Projects
                                     </div>
-                                    <div style={{maxHeight:'150px', overflow:'auto'}}>
-                                        {this.current.map((project)=>(
-                                            <Project key={project} id={project} />
+                                    <div style={{maxHeight: '150px', overflow: 'auto'}}>
+                                        {this.current.map((project) => (
+                                            <Project key={project} id={project}/>
                                         ))}
                                     </div>
                                 </div>
@@ -212,10 +222,36 @@ class Info extends React.Component {
                                     <div style={this.styles.miniTitle}>
                                         Upcoming Projects
                                     </div>
-                                    <div style={{maxHeight:'150px', overflow:'auto'}}>
-                                        {this.current.map((project)=>(
-                                            <Project key={project} id={project} />
+                                    <div style={{maxHeight: '150px', overflow: 'auto'}}>
+                                        {this.current.map((project) => (
+                                            <Project key={project} id={project}/>
                                         ))}
+                                    </div>
+                                </div>
+                                <div style={this.styles.bubblesTab}>
+                                    <div style={{
+                                        width: '100px',
+                                        fontSize: '25px',
+                                        fontWeight: '500',
+                                        display: 'inline-block'
+                                    }}>
+                                        Related Bubbles
+                                    </div>
+                                    <div style={{
+                                        display: 'inline-block',
+                                        width: '100%',
+                                        height: 'inherit',
+                                        marginLeft: '20px'
+                                    }}>
+                                        <div style={{display: 'flex', width: '100%', height: '100%'}}>
+                                            {this.related.map((bubble) => (
+                                                <div style={{width: 'inherit', height: 'inherit', marginRight: '10px'}}>
+                                                    <Bubble keyReact={bubble} key={bubble} clicked={this.props.clicked}
+                                                            adapt={true} view={2} data={(id, location) => null}/>
+                                                </div>
+                                            ))}
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

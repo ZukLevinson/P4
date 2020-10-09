@@ -13,7 +13,7 @@ class Project extends React.Component {
         width:'10%',
         margin:'10px',
         borderRadius:'10px',
-        boxShadow: '0 0 20px rgba(46, 46, 46, 0.11)',
+        boxShadow: '0 0 10px rgba(46, 46, 46, 0.11)',
     }
     titleStyle = {
         fontWeight:'600',

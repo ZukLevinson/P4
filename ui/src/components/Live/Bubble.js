@@ -16,6 +16,26 @@ class Bubble extends React.Component {
         }
         this.data = [];
         this.selector = React.createRef();
+        if(this.props.adapt){
+            this.styles.containerStyle = {
+                width: '100px',
+                height: 'inherit',
+                display: 'flex',
+                position: 'relative',
+            }
+            this.styles.bubbleStyle = {
+                height: '100%',
+                background: 'rgba(249,249,249,0.95)',
+                borderRadius: '5vw',
+                boxShadow: '0 0 20px rgba(46, 46, 46, 0.11)',
+                margin: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                cursor: 'pointer',
+                transition: '0.5s',
+                userSelect: 'none'
+            }
+        }
     }
 
     styles = {
@@ -48,6 +68,30 @@ class Bubble extends React.Component {
     componentDidMount() {
         this.jsonToData();
         this.props.data(this.props.keyReact, this.selector.current.getBoundingClientRect())
+
+        if (this.props.adapt) {
+            const element=this.selector.current.getBoundingClientRect()
+            this.styles.containerStyle = {
+                width: `${element.height}px`,
+                height: `${element.height}px`,
+                display: 'flex',
+                position: 'relative',
+            }
+            this.styles.bubbleStyle = {
+                width: '100%',
+                height: '100%',
+                background: 'rgba(249,249,249,0.95)',
+                borderRadius: '5vw',
+                boxShadow: '0 0 20px rgba(46, 46, 46, 0.11)',
+                margin: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                cursor: 'pointer',
+                transition: '0.5s',
+                userSelect: 'none'
+            }
+            this.forceUpdate()
+        }
     }
 
     jsonToData = () => {
@@ -93,8 +137,8 @@ class Bubble extends React.Component {
             return (
                 <div className={'bubble'} ref={this.selector} id={this.props.keyReact}
                      style={this.styles.containerStyle}
-                     onMouseOver={this.handleHover.bind(this)}
-                     onMouseLeave={this.handleLeave.bind(this)}
+                     onMouseOver={!this.props.adapt?this.handleHover.bind(this):null}
+                     onMouseLeave={!this.props.adapt?this.handleLeave.bind(this):null}
                      onClick={this.props.clicked.bind(this, this.state.key)}>
                     <div style={this.styles.bubbleStyle}>
                         <div style={this.styles.titleStyle}>

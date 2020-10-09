@@ -128,7 +128,8 @@ class Cluster extends React.Component {
                                                     clicked={this.bubbleClicked}
                                                     clickedId={this.clickedId}
                                                     view={this.view}
-                                                    data={this.updateLocation}/>
+                                                    data={this.updateLocation}
+                                                    adapt={false}/>
                                         )
                                     )}
                                 </div>
