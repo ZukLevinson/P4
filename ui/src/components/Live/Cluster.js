@@ -1,6 +1,4 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
-
 
 import Bubble from "./Bubble";
 import Arrows from "./Arrows";
@@ -17,7 +15,7 @@ class Cluster extends React.Component {
 
         this.flag = false;
         this.view = 1;
-        this.clicked = false;
+        this.clickedId = null;
 
         this.bubblesArray = [['1', '0', '3', '4', '5', '6'], ['7', '8', '9'], ['10', '11', '12', '13']];
         this.locations = {}
@@ -91,13 +89,21 @@ class Cluster extends React.Component {
             justifyContent: 'space-evenly'
         };
     };
+
     updateLocation = (id, position) => {
         this.locations["'" + id + "'"] = position
-    }
-
+    };
     launchArrows = async () => {
         if (this.locations !== null) return this.flag = true
-    }
+    };
+    bubbleClicked = (id) => {
+        if (this.clickedId === null) {
+            this.clickedId = id;
+        } else {
+            this.clickedId = null;
+        }
+        this.forceUpdate();
+    };
 
     render() {
         if (this.props.scale > 0.5) {
@@ -105,7 +111,7 @@ class Cluster extends React.Component {
                 <div style={this.boxStyle} ref={this.selector} onMouseMove={this.handleMovement.bind(this)}
                      onMouseLeave={this.handleLeave}>
                     <div id={'bubbles'} style={this.containerStyle} onClick={this.handleClick}>
-                        {this.state.view !== 2 ?
+                        {this.state.view !== 2 && this.clickedId === null?
                             <div style={{
                                 position: 'absolute',
                                 bottom: '50px',
@@ -114,19 +120,21 @@ class Cluster extends React.Component {
                             }}>
                                 Cluster View: Floor
                             </div> : null}
-                        {this.flag ? <Arrows locations={this.locations}/> : null}
-                        {this.bubblesArray.map((bubbles) => (
+                        {this.flag && this.clickedId === null ? <Arrows locations={this.locations}/> : null}
+                        {this.clickedId === null ? this.bubblesArray.map((bubbles) => (
                                 <div key={this.bubblesArray.indexOf(bubbles)} style={{display: "flex", maxWidth: '100%'}}>
                                     {bubbles.map((bubble) => (
-                                            <Bubble key={bubble} keyReact={bubble} clicked={this.clicked}
+                                            <Bubble key={bubble} keyReact={bubble}
+                                                    clicked={this.bubbleClicked}
+                                                    clickedId={this.clickedId}
                                                     view={this.view}
                                                     data={this.updateLocation}/>
                                         )
                                     )}
                                 </div>
                             )
-                        )}
-                        {this.clicked !== false ? <Info id={this.clicked} locations={this.locations}/> : null}
+                        ) : null}
+                        {this.clickedId !== null ? <Info keyId={this.clickedId} locations={this.locations} clicked={this.bubbleClicked}/> : null}
                     </div>
                 </div>
             )
