@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@react-navigation/native": "^5.7.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "history": "^5.0.0",
     "prop-types": "^15.7.2",
     "react-cookie": "^4.0.3",
